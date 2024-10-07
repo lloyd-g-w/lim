@@ -1,12 +1,10 @@
 return {
-
     "neovim/nvim-lspconfig",
     config = function()
         local lspconfig = require('lspconfig')
-        local opts = {}
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'lsp go to definition' })
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'lsp hover' })
+        vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, { desc = 'lsp code actions' })
         lspconfig.ts_ls.setup {}
         lspconfig.eslint.setup {}
         lspconfig.pyright.setup {}

@@ -1,13 +1,30 @@
 return {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
-  init = function()
-    vim.o.timeout = true
-    vim.o.timeoutlen = 300
-  end,
-  opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
+	"folke/which-key.nvim",
+	dependencies = {
+		{ "echasnovski/mini.icons", version = "*" },
+	},
+	opts = {
+		defaults = {},
+		spec = {
+			{
+				mode = { "n", "v" },
+				{ "<leader>f", group = "file" },
+				{ "<leader>c", group = "code" },
+			},
+		},
+	},
+	event = "VeryLazy",
+	keys = {
+		{
+			"<leader>?",
+			function()
+				require("which-key").show({ global = true })
+			end,
+			desc = "buffer Keymaps (which-key)",
+		},
+		{
+			"<leader>f",
+			group = "file",
+		},
+	},
 }

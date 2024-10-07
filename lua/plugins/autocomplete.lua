@@ -55,11 +55,11 @@ return {
         local s = ls.snippet
         local t = ls.text_node
         local i = ls.insert_node
-        
+
         ls.add_snippets("c", {
-            s("cheadercomment",{
+            s("cheadercomment", {
                 t("// Lloyd Williams (z5599988) | Written on " .. os.date("%d/%m/%Y ")),
-                t({'', "// Description: "}) 
+                t({ '', "// Description: " })
             })
         })
 
