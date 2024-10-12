@@ -56,6 +56,10 @@ return {
         local t = ls.text_node
         local i = ls.insert_node
 
+        require("luasnip").config.setup { enable_autosnippets = true }
+
+        -- CUSTOM SNIPPETS
+
         ls.add_snippets("c", {
             s("cheadercomment", {
                 t("// Lloyd Williams (z5599988) | Written on " .. os.date("%d/%m/%Y ")),
@@ -63,9 +67,24 @@ return {
             })
         })
 
+        ls.add_snippets("tex", {
+            s({ trig = "bf", snippetType='autosnippet'}, {
+                t("\\textbf{"),
+                i(1),
+                t("}")
+            }),
+        })
 
+        ls.add_snippets("tex", {
+            s({ trig = "bb", snippetType='autosnippet'}, {
+                t("\\mathbb{"),
+                i(1),
+                t("}")
+            }),
+        })
 
-        require("luasnip").config.setup { enable_autosnippets = true }
+        -- END CUSTOM SNIPPETS
+
         vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
