@@ -57,9 +57,8 @@ return {
         local t = ls.text_node
         local i = ls.insert_node
 
-        ls.add_snippets("tex", {
-            s("bf", { t("\\textbf{"), i(1), t("}") }),
-        })
+
+        -- CUSTOM SNIPPETS
 
         ls.add_snippets("c", {
             s("cheadercomment", {
@@ -68,7 +67,23 @@ return {
             })
         })
 
+        ls.add_snippets("tex", {
+            s({ trig = "bf", snippetType='autosnippet'}, {
+                t("\\textbf{"),
+                i(1),
+                t("}")
+            }),
+        })
 
+        ls.add_snippets("tex", {
+            s({ trig = "bb", snippetType='autosnippet'}, {
+                t("\\mathbb{"),
+                i(1),
+                t("}")
+            }),
+        })
+
+        -- END CUSTOM SNIPPETS
 
         vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
