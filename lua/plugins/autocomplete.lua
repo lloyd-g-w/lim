@@ -48,6 +48,7 @@ return {
         })
 
 
+        require("luasnip").config.setup { enable_autosnippets = true }
 
         require('luasnip-latex-snippets').setup()
 
@@ -55,6 +56,10 @@ return {
         local s = ls.snippet
         local t = ls.text_node
         local i = ls.insert_node
+
+        ls.add_snippets("tex", {
+            s("bf", { t("\\textbf{"), i(1), t("}") }),
+        })
 
         ls.add_snippets("c", {
             s("cheadercomment", {
@@ -65,7 +70,6 @@ return {
 
 
 
-        require("luasnip").config.setup { enable_autosnippets = true }
         vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
