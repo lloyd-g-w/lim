@@ -4,7 +4,8 @@ return {
         name = "dracula",
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme "catppuccin-frappe"
+            vim.o.background = "dark" -- or "light" for light mode
+            vim.cmd([[colorscheme gruvbox-material]])
         end
     },
     {
@@ -12,5 +13,8 @@ return {
     },
     {
         "catppuccin/nvim", name = "catppuccin", priority = 1000
+    },
+    {
+        "sainnhe/gruvbox-material", priority = 1000, config = true, opts = ...
     }
 }
