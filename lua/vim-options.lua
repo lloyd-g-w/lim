@@ -8,6 +8,5 @@ vim.cmd("set termguicolors")
 vim.cmd("set undodir=~/.vim/undodir")
 vim.cmd("set undofile")
 vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "format" })
-vim.cmd("set cc=80")
 vim.cmd("set relativenumber")
 
