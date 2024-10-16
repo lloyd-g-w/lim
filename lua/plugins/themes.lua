@@ -7,7 +7,7 @@ return {
             vim.o.background = "dark" -- or "light" for light mode
             vim.g.gruvbox_material_background = "soft"
             vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
-            vim.cmd([[colorscheme gruvbox]])
+            vim.cmd([[colorscheme gruvbox-material]])
         end
     },
     {
@@ -32,14 +32,14 @@ return {
                 invert_signs = false,
                 invert_tabline = false,
                 invert_intend_guides = false,
-                inverse = true,    -- invert background for search, diffs, statuslines and errors
+                inverse = true, -- invert background for search, diffs, statuslines and errors
                 contrast = "soft", -- can be "hard", "soft" or empty string
                 palette_overrides = {},
                 overrides = {},
                 dim_inactive = false,
                 transparent_mode = false,
             })
-            vim.cmd("colorscheme gruvbox")
+            -- vim.cmd("colorscheme gruvbox")
         end,
     },
     {
