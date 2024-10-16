@@ -6,6 +6,7 @@ return {
         config = function()
             vim.o.background = "dark" -- or "light" for light mode
             vim.g.gruvbox_material_background = "soft"
+            vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
             vim.cmd([[colorscheme gruvbox-material]])
         end
     },
