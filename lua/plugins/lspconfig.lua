@@ -7,7 +7,7 @@ return {
         vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, { desc = 'lsp code actions' })
         lspconfig.csharp_ls.setup {}
         lspconfig.ts_ls.setup {}
-        lspconfig.pyright.setup {}
+        lspconfig.basedpyright.setup {}
         lspconfig.html.setup {}
         lspconfig.cssls.setup {}
         lspconfig.jsonls.setup {}
