@@ -31,7 +31,7 @@ return {
         map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
 
         -- Pin/unpin buffer
-        map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+        map('n', '<A-i>', '<Cmd>BufferPin<CR>', opts)
 
         -- Goto pinned/unpinned buffer
         --                 :BufferGotoPinned
@@ -51,8 +51,8 @@ return {
         --                 :BufferCloseBuffersRight
 
         -- Magic buffer-picking mode
-        map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
-        map('n', '<C-s-p>', '<Cmd>BufferPickDelete<CR>', opts)
+        map('n', '<A-p>', '<Cmd>BufferPick<CR>', opts)
+        map('n', '<A-s-p>', '<Cmd>BufferPickDelete<CR>', opts)
 
         -- Sort automatically by...
         map('n', '<leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
@@ -66,6 +66,8 @@ return {
         -- :BarbarDisable - very bad command, should never be used
     end,
     opts = {
+        auto_hide = 1,
+        animation = false
         -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
         -- animation = true,
         -- insert_at_start = true,
