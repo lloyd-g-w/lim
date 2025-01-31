@@ -59,29 +59,36 @@ return {
 
 
         -- CUSTOM SNIPPETS
-
-        ls.add_snippets("c", {
+        local c_type_snips = {
             s("cheadercomment", {
                 t("// Lloyd Williams (z5599988) | Written on " .. os.date("%d/%m/%Y ")),
                 t({ '', "// Description: " })
-            })
-        })
+            }),
+            s("bigcomment", {
+                t("// " .. string.rep("=", 20) .. " "),
+                i(1),
+                t(" " .. string.rep("=", 20) .. " //"),
+            }),
+        }
+        ls.add_snippets("c", c_type_snips)
+
+        ls.add_snippets("cpp", c_type_snips)
 
         ls.add_snippets("tex", {
-            s({ trig = "bf", snippetType='autosnippet'}, {
+            s({ trig = "bf", snippetType = 'autosnippet' }, {
                 t("\\textbf{"),
                 i(1),
                 t("}")
             }),
-        })
-
-        ls.add_snippets("tex", {
-            s({ trig = "bb", snippetType='autosnippet'}, {
+            s({ trig = "bb", snippetType = 'autosnippet' }, {
                 t("\\mathbb{"),
                 i(1),
                 t("}")
             }),
         })
+
+        require("luasnip.loaders.from_lua").load()
+
 
         -- END CUSTOM SNIPPETS
 
