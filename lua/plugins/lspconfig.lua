@@ -6,7 +6,6 @@ return {
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'lsp hover' })
         vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, { desc = 'lsp code actions' })
         require 'lspconfig'.hls.setup {}
-        lspconfig.java_language_server.setup {}
         lspconfig.jdtls.setup {}
         lspconfig.csharp_ls.setup {}
         lspconfig.ts_ls.setup {}
