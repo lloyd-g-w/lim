@@ -7,7 +7,9 @@ return {
         vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, { desc = 'lsp code actions' })
         require 'lspconfig'.hls.setup {}
         lspconfig.ocamllsp.setup {}
-        lspconfig.jdtls.setup {}
+        lspconfig.jdtls.setup {
+            cmd = { 'jdtls', '--java-executable', '/usr/lib/jvm/java-21-openjdk/bin/java' }
+        }
         lspconfig.csharp_ls.setup {}
         lspconfig.ts_ls.setup {}
         lspconfig.basedpyright.setup {}
