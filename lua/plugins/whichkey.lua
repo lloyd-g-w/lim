@@ -29,9 +29,9 @@ return {
         {
             "<leader>fe",
             function()
-                vim.cmd("Explore")
+                vim.cmd("Oil")
             end,
-            desc = "file explore",
+            desc = "file explore (oil)",
         }
     },
 }
