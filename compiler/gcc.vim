@@ -40,6 +40,7 @@ if exists('g:compiler_gcc_ignore_unmatched_lines')
   CompilerSet errorformat+=%-G%.%#
 endif
 
+" Added this line:
 CompilerSet makeprg=gcc\ -o\ %<\ %\ 
 
 let &cpo = s:cpo_save
