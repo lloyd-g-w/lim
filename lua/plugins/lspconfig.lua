@@ -1,6 +1,8 @@
 return {
     "neovim/nvim-lspconfig",
     config = function()
+        local java_exe = os.getenv("JAVA_21_EXE")
+
         local lspconfig = require('lspconfig')
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'lsp go to definition' })
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'lsp hover' })
@@ -8,7 +10,7 @@ return {
         require 'lspconfig'.hls.setup {}
         lspconfig.ocamllsp.setup {}
         lspconfig.jdtls.setup {
-            cmd = { 'jdtls', '--java-executable', '/usr/lib/jvm/java-21-openjdk/bin/java' }
+            cmd = { 'jdtls', '--java-executable', java_exe }
         }
         lspconfig.csharp_ls.setup {}
         lspconfig.ts_ls.setup {}
