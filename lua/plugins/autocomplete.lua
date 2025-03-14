@@ -59,26 +59,22 @@ return {
 
 
         -- CUSTOM SNIPPETS
-        local all_snips = {
+        local c_type_snips = {
+            s("cheadercomment", {
+                t("// Lloyd Williams (z5599988) | Written on " .. os.date("%d/%m/%Y ")),
+                t({ '', "// Description: " })
+            }),
             s("bigcomment", {
                 t("// " .. string.rep("=", 20) .. " "),
                 i(1),
                 t(" " .. string.rep("=", 20) .. " //"),
             }),
         }
-
-        local c_type_snips = {
-            s("cheadercomment", {
-                t("// Lloyd Williams (z5599988) | Written on " .. os.date("%d/%m/%Y ")),
-                t({ '', "// Description: " })
-            }),
-
-        }
-        ls.add_snippets("all", all_snips)
-
         ls.add_snippets("c", c_type_snips)
+
         ls.add_snippets("cpp", c_type_snips)
 
+        ls.add_snippets("java", { c_type_snips[2] })
 
         ls.add_snippets("tex", {
             s({ trig = "bf", snippetType = 'autosnippet' }, {
