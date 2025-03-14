@@ -11,6 +11,7 @@ vim.cmd("set undofile")
 vim.cmd("set number")
 vim.cmd("set relativenumber")
 vim.cmd("set cursorline")
+vim.cmd("set nohlsearch")
 
 -- Keybinds
 
