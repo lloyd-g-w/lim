@@ -7,7 +7,6 @@ vim.cmd("set nu")
 vim.cmd("set termguicolors")
 vim.cmd("set undodir=~/.vim/undodir")
 vim.cmd("set undofile")
-
 vim.cmd("set number")
 vim.cmd("set relativenumber")
 vim.cmd("set cursorline")
@@ -28,6 +27,12 @@ vim.keymap.set('n', '<leader>cc', ':cclose<CR>', { noremap = true, silent = true
 -- Leader cn and cp to navigate through errors
 vim.keymap.set('n', '<leader>cn', ':cnext<CR>', { noremap = true, silent = true, desc = "next error" })
 vim.keymap.set('n', '<leader>cp', ':cprev<CR>', { noremap = true, silent = true, desc = "previous error" })
+
+-- DIAGNOSTICS
+vim.keymap.set('n', '<leader>do', vim.diagnostic.open_float,
+    { noremap = true, silent = true, desc = "open hovering diagnostic" })
+vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { noremap = true, silent = true, desc = "next error" })
+vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { noremap = true, silent = true, desc = "previous error" })
 
 -- Allows for .nvim.lua files to be loaded
 vim.o.exrc = true
