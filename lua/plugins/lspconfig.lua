@@ -12,6 +12,7 @@ return {
         -- lspconfig.jdtls.setup {
         --     cmd = { 'jdtls', '--java-executable', java_exe }
         -- }
+        lspconfig.svelte.setup {}
         lspconfig.csharp_ls.setup {}
         lspconfig.ts_ls.setup {}
         lspconfig.basedpyright.setup {}
