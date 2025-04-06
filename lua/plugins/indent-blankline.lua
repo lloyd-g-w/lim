@@ -5,9 +5,14 @@ return {
     ---@type ibl.config
     opts =
     {
-        debounce = 100,
         indent = {
-            char = "▏",
+            char = "│",
+            -- char = "▏",
+        },
+        scope = {
+            show_start = false,
+            show_end = false,
+            enabled = true,
         },
     }
 
