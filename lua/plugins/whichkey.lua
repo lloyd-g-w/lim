@@ -29,9 +29,10 @@ return {
         {
             "<leader>fe",
             function()
-                vim.cmd("Oil")
+                vim.cmd(":lua MiniFiles.open()")
+                -- vim.cmd("Oil")
             end,
-            desc = "file explore (oil)",
+            desc = "file explorer",
         }
     },
 }
