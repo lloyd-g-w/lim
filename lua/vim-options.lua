@@ -19,7 +19,7 @@ vim.api.nvim_set_keymap('t', '<C-q>', '<C-\\><C-n>', { noremap = true, silent = 
 
 -- Leader cf to format with conform
 -- vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "format" })
-vim.keymap.set('n', '<leader>cf', ":Format<CR>", { desc = "format" })
+vim.keymap.set('n', '<leader>cf', ":Format<CR>", { silent = true, desc = "format" })
 
 -- ERRORS
 -- Leader co to open current error list and cc to close it
