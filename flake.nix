@@ -17,9 +17,21 @@
         # Telescope Deps
         ripgrep
 
-        # LSP
+        # LSPs
         nil
         texlab
+        lua-language-server
+        svelte-language-server
+        jdt-language-server
+        ocamlPackages.ocaml-lsp
+        typescript-language-server
+        vim-language-server
+        basedpyright
+        csharp-ls
+        cmake-language-server
+
+        # Formatters
+        nixfmt-rfc-style
     ];
   in {
     # 1) expose the raw repo path so you can do `.source = limConfig;`

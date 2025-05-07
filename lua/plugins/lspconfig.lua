@@ -17,19 +17,9 @@ return {
         lspconfig.csharp_ls.setup {}
         lspconfig.ts_ls.setup {}
         lspconfig.basedpyright.setup {}
-        lspconfig.html.setup {}
-        lspconfig.cssls.setup {}
-        lspconfig.jsonls.setup {}
-        lspconfig.bashls.setup {}
-        lspconfig.dockerls.setup {}
         lspconfig.vimls.setup {}
-        lspconfig.yamlls.setup {}
-        lspconfig.terraformls.setup {}
-        lspconfig.graphql.setup {}
-        lspconfig.rust_analyzer.setup {}
         lspconfig.lua_ls.setup {}
         lspconfig.cmake.setup {}
-        lspconfig.clangd.setup {}
         lspconfig.texlab.setup {}
     end
 }
