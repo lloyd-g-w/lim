@@ -12,6 +12,7 @@ return {
                 -- Conform will run the first available formatter
                 javascript = { "eslint_d" },
                 typescript = { "eslint_d" },
+                nix = {"nixfmt"},
             },
         })
 
