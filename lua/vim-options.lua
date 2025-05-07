@@ -17,8 +17,9 @@ vim.cmd("set nohlsearch")
 -- Ctrl-q to exit terminal mode
 vim.api.nvim_set_keymap('t', '<C-q>', '<C-\\><C-n>', { noremap = true, silent = true, desc = "exit terminal mode" })
 
--- Leader cf to format
-vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "format" })
+-- Leader cf to format with conform
+-- vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "format" })
+vim.keymap.set('n', '<leader>cf', require("conform").format(), { desc = "format" })
 
 -- ERRORS
 -- Leader co to open current error list and cc to close it
