@@ -14,10 +14,11 @@
     ];
   in {
     # 1) expose the raw repo path so you can do `.source = limConfig;`
-    packages.${system}.limConfig = ./.;
-
     # 2) expose the list of dependencies
-    packages.${system}.limDeps = deps;
+          packages.${system} = {
+      limConfig = ./.;  # the root of this repo
+      limDeps   = deps; # the list of tools
+    };
 
     # 3) export a Home-Manager **module** that wires both together
       home-manager-module = { config, pkgs, ... }: {
