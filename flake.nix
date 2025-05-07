@@ -10,7 +10,16 @@
     system = "x86_64-linux";
     pkgs   = import nixpkgs { inherit system; };
     deps   = with pkgs; [
-      neovim
+        # VimTex Deps
+        tree-sitter
+        nodejs_22
+
+        # Telescope Deps
+        ripgrep
+
+        # LSP
+        nil
+        texlab
     ];
   in {
     # 1) expose the raw repo path so you can do `.source = limConfig;`
