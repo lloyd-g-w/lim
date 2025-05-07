@@ -1,5 +1,6 @@
 return {
     "lervag/vimtex",
+    lazy = false,
     init = function()
         -- vim.cmd("set conceallevel=2")
         vim.g.vimtex_view_method = "zathura"
