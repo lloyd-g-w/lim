@@ -32,6 +32,7 @@
         nixfmt-rfc-style
         yq-go
         black
+        jq
         eslint_d
         stylua
       ];
