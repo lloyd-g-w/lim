@@ -13,7 +13,8 @@ return {
 				javascript = { "eslint_d" },
 				typescript = { "eslint_d" },
 				yaml = { "yq" },
-				json = { "jq", "prettier" },
+				json = { "jq" },
+				jsonc = { "prettier" },
 				nix = { "nixfmt" },
 			},
 		})
