@@ -35,6 +35,7 @@
         jq
         eslint_d
         stylua
+        nodePackages.prettier
       ];
     in {
       # 1) expose the raw repo path so you can do `.source = limConfig;`
