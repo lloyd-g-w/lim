@@ -30,6 +30,7 @@
 
         # Formatters
         nixfmt-rfc-style
+        tex-fmt
         yq-go
         black
         jq
