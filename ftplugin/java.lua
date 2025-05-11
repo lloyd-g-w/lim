@@ -3,12 +3,12 @@ local jdtls_setup = require("jdtls.setup")
 local home = os.getenv("HOME")
 
 -- Get Java 21 executable path from environment variable
--- local java_exe = os.getenv('JAVA_21_EXE')
--- if not java_exe then
---   -- Fallback if the environment variable isn't set
---   print("Warning: JAVA_21_EXE environment variable not set, using default 'java' command")
---   java_exe = 'java'
--- end
+local java_exe = os.getenv("JAVA_21_EXE")
+if not java_exe then
+	-- Fallback if the environment variable isn't set
+	print("Warning: JAVA_21_EXE environment variable not set, using default 'java' command")
+	java_exe = "java"
+end
 
 -- Find root of project
 local root_markers = { "gradlew", "mvnw", ".git", "pom.xml", "build.gradle" }
