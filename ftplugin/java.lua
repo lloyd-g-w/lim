@@ -1,34 +1,34 @@
 local jdtls = require("jdtls")
 local jdtls_setup = require("jdtls.setup")
 local home = os.getenv("HOME")
+local cache_dir = home .. "/.cache/jdtls"
 
--- Get Java 21 executable from environment (or fallback)
-local java_exe = os.getenv("JAVA_21_EXE") or "java"
+-- Ensure writable config directory exists
+vim.fn.mkdir(cache_dir, "p")
+vim.fn.system({ "cp", "-r", vim.fn.glob("/nix/store/*jdt-language-server*/share/java/jdtls/config_linux"), cache_dir })
 
--- Find project root
-local root_markers = { "gradlew", "mvnw", ".git", "pom.xml", "build.gradle" }
-local root_dir = jdtls_setup.find_root(root_markers) or vim.fn.getcwd()
+local config_path = cache_dir .. "/config_linux"
 
--- Find paths installed via Nix
+-- Find plugin JAR and lombok as before
 local jar_path = vim.fn.glob(
 	"/nix/store/*-jdt-language-server-*/share/java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar",
 	false,
 	true
 )[1] or ""
-local config_path = vim.fn.glob("/nix/store/*-jdt-language-server-*/share/java/jdtls/config_linux", false, true)[1]
-	or ""
 local lombok_path = vim.fn.glob("/nix/store/*lombok*/share/java/lombok.jar", false, true)[1] or ""
 
--- Safety checks
-if jar_path == "" or config_path == "" then
-	vim.notify("JDTLS: Failed to find required JAR or config", vim.log.levels.ERROR)
+if jar_path == "" or not vim.loop.fs_stat(config_path) then
+	vim.notify("JDTLS: failed to find or copy required files", vim.log.levels.ERROR)
 	return
 end
 
--- Setup config
+local root_markers = { "gradlew", "mvnw", ".git", "pom.xml", "build.gradle" }
+local root_dir = jdtls_setup.find_root(root_markers) or vim.fn.getcwd()
+
 local config = {
 	cmd = {
-		java_exe,
+		"java",
+		"-javaagent:" .. lombok_path,
 		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 		"-Dosgi.bundles.defaultStartLevel=4",
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -40,7 +40,6 @@ local config = {
 		"java.base/java.util=ALL-UNNAMED",
 		"--add-opens",
 		"java.base/java.lang=ALL-UNNAMED",
-		"-javaagent:" .. lombok_path,
 		"-jar",
 		jar_path,
 		"-configuration",
@@ -51,5 +50,4 @@ local config = {
 	root_dir = root_dir,
 }
 
--- Launch JDTLS
 jdtls.start_or_attach(config)
