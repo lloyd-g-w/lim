@@ -2,31 +2,33 @@ local jdtls = require("jdtls")
 local jdtls_setup = require("jdtls.setup")
 local home = os.getenv("HOME")
 
--- Get Java 21 executable path from environment variable
-local java_exe = os.getenv("JAVA_21_EXE")
-if not java_exe then
-	-- Fallback if the environment variable isn't set
-	print("Warning: JAVA_21_EXE environment variable not set, using default 'java' command")
-	java_exe = "java"
-end
+-- Get Java 21 executable from environment (or fallback)
+local java_exe = os.getenv("JAVA_21_EXE") or "java"
 
--- Find root of project
+-- Find project root
 local root_markers = { "gradlew", "mvnw", ".git", "pom.xml", "build.gradle" }
-local root_dir = jdtls_setup.find_root(root_markers)
-if root_dir == "" then
-	root_dir = vim.fn.getcwd()
+local root_dir = jdtls_setup.find_root(root_markers) or vim.fn.getcwd()
+
+-- Find paths installed via Nix
+local jar_path = vim.fn.glob(
+	"/nix/store/*-jdt-language-server-*/share/java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar",
+	false,
+	true
+)[1] or ""
+local config_path = vim.fn.glob("/nix/store/*-jdt-language-server-*/share/java/jdtls/config_linux", false, true)[1]
+	or ""
+local lombok_path = vim.fn.glob("/nix/store/*lombok*/share/java/lombok.jar", false, true)[1] or ""
+
+-- Safety checks
+if jar_path == "" or config_path == "" then
+	vim.notify("JDTLS: Failed to find required JAR or config", vim.log.levels.ERROR)
+	return
 end
 
--- Setup JDTLS config
-local jdtls_path = vim.fn.stdpath("data") .. "/jdtls"
-local config_path = jdtls_path .. "/config_linux" -- Adjust for your OS (linux/mac/win)
-local plugins_path = jdtls_path .. "/plugins/"
-local jar_path = vim.fn.glob(plugins_path .. "org.eclipse.equinox.launcher_*.jar")
-local lombok_path = jdtls_path .. "/lombok.jar"
-
+-- Setup config
 local config = {
 	cmd = {
-		java_exe, -- Use the Java 21 executable here
+		java_exe,
 		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 		"-Dosgi.bundles.defaultStartLevel=4",
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -47,9 +49,7 @@ local config = {
 		home .. "/.cache/jdtls-workspace/" .. vim.fn.fnamemodify(root_dir, ":p:h:t"),
 	},
 	root_dir = root_dir,
-	-- Rest of your configuration remains the same
-	-- ...
 }
 
--- Set up the LSP
+-- Launch JDTLS
 jdtls.start_or_attach(config)
