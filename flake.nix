@@ -15,6 +15,9 @@
         # Telescope Deps
         ripgrep
 
+        # Jdtls Deps
+        jdk23
+
         # LSPs
         nil
         texlab
