@@ -1,29 +1,16 @@
-local jdtls = require("jdtls")
-local jdtls_setup = require("jdtls.setup")
 local home = os.getenv("HOME")
-local cache_dir = home .. "/.cache/jdtls"
+local jdtls_path = home .. "/.local/share/jdtls"
+local jar_path = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
+local config_path = jdtls_path .. "/config_linux"
+local lombok_path = jdtls_path .. "/lombok.jar"
 
--- Ensure writable config directory exists
-vim.fn.mkdir(cache_dir, "p")
-vim.fn.system({ "cp", "-r", vim.fn.glob("/nix/store/*jdt-language-server*/share/java/jdtls/config_linux"), cache_dir })
-
-local config_path = cache_dir .. "/config_linux"
-
--- Find plugin JAR and lombok as before
-local jar_path = vim.fn.glob(
-	"/nix/store/*-jdt-language-server-*/share/java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar",
-	false,
-	true
-)[1] or ""
-local lombok_path = vim.fn.glob("/nix/store/*lombok*/share/java/lombok.jar", false, true)[1] or ""
-
-if jar_path == "" or not vim.loop.fs_stat(config_path) then
-	vim.notify("JDTLS: failed to find or copy required files", vim.log.levels.ERROR)
+if jar_path == "" then
+	vim.notify("Could not find launcher JAR", vim.log.levels.ERROR)
 	return
 end
 
 local root_markers = { "gradlew", "mvnw", ".git", "pom.xml", "build.gradle" }
-local root_dir = jdtls_setup.find_root(root_markers) or vim.fn.getcwd()
+local root_dir = require("jdtls.setup").find_root(root_markers) or vim.fn.getcwd()
 
 local config = {
 	cmd = {
@@ -50,4 +37,4 @@ local config = {
 	root_dir = root_dir,
 }
 
-jdtls.start_or_attach(config)
+require("jdtls").start_or_attach(config)
