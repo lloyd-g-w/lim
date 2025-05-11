@@ -17,6 +17,7 @@
 
         # Jdtls Deps
         jdk23
+        gradle
         lombok
 
         # LSPs
