@@ -18,7 +18,7 @@ if root_dir == "" then
 end
 
 -- Setup JDTLS config
-local jdtls_path = jdtls_path = vim.fn.stdpath("data") .. "/jdtls"
+local jdtls_path = vim.fn.stdpath("data") .. "/jdtls"
 local config_path = jdtls_path .. "/config_linux" -- Adjust for your OS (linux/mac/win)
 local plugins_path = jdtls_path .. "/plugins/"
 local jar_path = vim.fn.glob(plugins_path .. "org.eclipse.equinox.launcher_*.jar")
