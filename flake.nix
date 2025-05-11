@@ -15,11 +15,6 @@
         # Telescope Deps
         ripgrep
 
-        # Jdtls Deps
-        jdk21
-        gradle
-        lombok
-
         # LSPs
         nil
         texlab
