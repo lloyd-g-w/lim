@@ -16,7 +16,7 @@
         ripgrep
 
         # Jdtls Deps
-        jdk23
+        jdk21
         gradle
         lombok
 
