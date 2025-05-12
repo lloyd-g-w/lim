@@ -5,7 +5,17 @@ local config = {
 		vim.fn.stdpath("data") .. "/jdtls-workspace",
 	},
 	root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew", "build.gradle" }),
-	settings = { java = {} },
+	settings = {
+		java = {
+			import = {
+				gradle = {
+					enabled = true,
+					wrapper = "gradlew",
+				},
+				maven = { enabled = true },
+			},
+		},
+	},
 	init_options = { bundles = {} },
 }
 require("jdtls").start_or_attach(config)
