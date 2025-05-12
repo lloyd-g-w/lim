@@ -12,7 +12,7 @@ local config = {
 					enabled = true,
 					wrapper = "gradlew",
 				},
-				maven = { enabled = true },
+				maven = { enabled = false },
 			},
 		},
 	},
