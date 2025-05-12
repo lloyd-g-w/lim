@@ -4,7 +4,7 @@ local config = {
 		"-data",
 		vim.fn.stdpath("data") .. "/jdtls-workspace",
 	},
-	root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew" }),
+	root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew", "build.gradle" }),
 	settings = { java = {} },
 	init_options = { bundles = {} },
 }
