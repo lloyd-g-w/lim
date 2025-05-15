@@ -10,7 +10,7 @@
       deps = with pkgs; [
         # VimTex Deps
         tree-sitter
-        nodejs_22
+        # nodejs_22
 
         # Telescope Deps
         ripgrep
