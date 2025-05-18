@@ -27,7 +27,7 @@
         basedpyright
         csharp-ls
         cmake-language-server
-        tailwind-css-language-server
+        tailwindcss-language-server
 
         # Formatters
         nixfmt-rfc-style
