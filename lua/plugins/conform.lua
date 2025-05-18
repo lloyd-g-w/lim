@@ -17,6 +17,7 @@ return {
 				jsonc = { "prettier" },
 				nix = { "nixfmt" },
 				tex = { "tex-fmt" },
+				css = { "prettier" },
 			},
 		})
 
