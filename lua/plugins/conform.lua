@@ -10,8 +10,8 @@ return {
 				-- You can customize some of the format options for the filetype (:help conform.format)
 				rust = { "rustfmt", lsp_format = "fallback" },
 				-- Conform will run the first available formatter
-				javascript = { "eslint_d" },
-				typescript = { "eslint_d" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
 				yaml = { "yq" },
 				json = { "jq" },
 				jsonc = { "prettier" },
