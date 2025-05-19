@@ -15,7 +15,7 @@ return {
 				yaml = { "yq" },
 				json = { "jq" },
 				jsonc = { "prettier" },
-				nix = { "nixfmt" },
+				nix = { "alejandra" },
 				tex = { "tex-fmt" },
 				css = { "prettier" },
 			},
