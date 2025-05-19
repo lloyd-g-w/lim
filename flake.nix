@@ -38,7 +38,6 @@
         yq-go
         black
         jq
-        eslint_d
         stylua
         nodePackages.prettier
       ];
