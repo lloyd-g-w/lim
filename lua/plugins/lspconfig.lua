@@ -8,7 +8,9 @@ return {
 		require("lspconfig").hls.setup({})
 		lspconfig.nil_ls.setup({})
 		lspconfig.ocamllsp.setup({})
-		lspconfig.svelte.setup({})
+		lspconfig.svelte.setup({
+			on_attach = function(client, bufnr) end,
+		})
 		lspconfig.csharp_ls.setup({})
 		lspconfig.ts_ls.setup({})
 		lspconfig.basedpyright.setup({})
