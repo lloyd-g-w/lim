@@ -18,6 +18,7 @@ return {
 				nix = { "alejandra" },
 				tex = { "tex-fmt" },
 				css = { "prettier" },
+				cpp = { "clang-format" },
 			},
 		})
 

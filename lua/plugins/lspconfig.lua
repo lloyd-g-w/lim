@@ -5,7 +5,8 @@ return {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "lsp go to definition" })
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp hover" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
-		require("lspconfig").hls.setup({})
+		lspconfig.hls.setup({})
+		lspconfig.clangd.setup({})
 		lspconfig.nil_ls.setup({})
 		lspconfig.ocamllsp.setup({})
 		lspconfig.svelte.setup({
