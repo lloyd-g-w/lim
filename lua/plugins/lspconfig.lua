@@ -7,11 +7,7 @@ return {
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
 		lspconfig.hls.setup({})
 		lspconfig.clangd.setup({
-			cmd = { "clangd", "--background-index", "--clang-tidy" },
-			root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".clangd", ".git"),
-			init_options = {
-				clangdFileStatus = true,
-			},
+			cmd = { "clangd", "--background-index" },
 		})
 		lspconfig.nil_ls.setup({})
 		lspconfig.ocamllsp.setup({})
