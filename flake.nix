@@ -47,15 +47,8 @@
     ];
   in {
     packages.${system} = {
-      limConfig = pkgs.runCommand "limConfig" {} ''
-        cp -r ${./.} $out
-      '';
-      limDeps = pkgs.runCommand "limDeps" {} ''
-        mkdir -p $out
-        for d in ${pkgs.lib.concatStringsSep " " deps}; do
-          ln -sfn $d $out/$(basename $(readlink -f $d))
-        done
-      '';
+      limConfig = ./.;
+      limDeps = deps;
     };
 
     homeManagerModules = {
@@ -66,7 +59,7 @@
       }: {
         programs.home-manager.enable = true;
         home.file.".config/nvim".source = self.packages.${system}.limConfig;
-        home.packages = [self.packages.${system}.limDeps];
+        home.packages = self.packages.${system}.limDeps;
         programs.neovim.enable = true;
       };
     };
