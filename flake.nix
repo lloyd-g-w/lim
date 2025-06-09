@@ -65,7 +65,7 @@
         ...
       }: {
         programs.home-manager.enable = true;
-        home.file.".config/nvim".source = self.packages."${system}.limConfig";
+        home.file.".config/nvim".source = self.packages.${system}.limConfig;
         home.packages = [self.packages.${system}.limDeps];
         programs.neovim.enable = true;
       };
