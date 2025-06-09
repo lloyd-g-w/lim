@@ -21,7 +21,7 @@
       ripgrep
 
       # LSPs
-      nil
+      nixd
       texlab
       lua-language-server
       svelte-language-server

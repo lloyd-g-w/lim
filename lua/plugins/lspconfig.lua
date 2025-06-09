@@ -9,7 +9,7 @@ return {
 		lspconfig.clangd.setup({
 			cmd = { "clangd", "--background-index" },
 		})
-		lspconfig.nil_ls.setup({})
+		lspconfig.nixd.setup({})
 		lspconfig.ocamllsp.setup({})
 		lspconfig.svelte.setup({
 			on_attach = function(client, bufnr) end,
