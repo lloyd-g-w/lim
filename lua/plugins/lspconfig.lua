@@ -6,7 +6,13 @@ return {
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp hover" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
 		lspconfig.hls.setup({})
-		lspconfig.clangd.setup({})
+		lspconfig.clangd.setup({
+			cmd = { "clangd", "--background-index", "--clang-tidy" },
+			root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".clangd", ".git"),
+			init_options = {
+				clangdFileStatus = true,
+			},
+		})
 		lspconfig.nil_ls.setup({})
 		lspconfig.ocamllsp.setup({})
 		lspconfig.svelte.setup({
