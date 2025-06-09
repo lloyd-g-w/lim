@@ -35,7 +35,7 @@
       tailwindcss-language-server
       ccls
       # This is also the entirety of clang
-      # llvmPackages_20.clang-tools
+      llvmPackages_20.clang-tools
 
       # Formatters
       alejandra
