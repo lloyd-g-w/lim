@@ -54,21 +54,23 @@
     };
 
     # 3) export a Home-Manager **module** that wires both together
-    home-manager-module = {
-      config,
-      pkgs,
-      ...
-    }: {
-      # Make sure HM is enabled
-      programs.home-manager.enable = true;
+    homeManagerModules = {
+      default = {
+        config,
+        pkgs,
+        ...
+      }: {
+        # Make sure HM is enabled
+        programs.home-manager.enable = true;
 
-      # Deploy your repo into ~/.config/nvim
-      home.file.".config/nvim".source = self.packages.${system}.limConfig;
+        # Deploy your repo into ~/.config/nvim
+        home.file.".config/nvim".source = self.packages.${system}.limConfig;
 
-      # Install your bundle of tools
-      home.packages = self.packages.${system}.limDeps;
+        # Install your bundle of tools
+        home.packages = self.packages.${system}.limDeps;
 
-      programs.neovim.enable = true;
+        programs.neovim.enable = true;
+      };
     };
   };
 }
