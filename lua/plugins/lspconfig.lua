@@ -6,12 +6,13 @@ return {
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp hover" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
 		lspconfig.hls.setup({})
-		lspconfig.clangd.setup({
-			cmd = {
-				"clangd",
-				"--background-index",
-			},
-		})
+		lspconfig.ccls.setup({})
+		-- lspconfig.clangd.setup({
+		-- 	cmd = {
+		-- 		"clangd",
+		-- 		"--background-index",
+		-- 	},
+		-- })
 		lspconfig.nixd.setup({})
 		lspconfig.ocamllsp.setup({})
 		lspconfig.svelte.setup({
