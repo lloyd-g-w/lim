@@ -18,7 +18,7 @@ return {
 				nix = { "alejandra" },
 				tex = { "tex-fmt" },
 				css = { "prettier" },
-				markdown = { "mdformat" },
+				markdown = { "markdownlint" },
 				cpp = { "clang-format" },
 			},
 		})

@@ -38,7 +38,7 @@
       llvmPackages_20.clang-tools
 
       # Formatters
-      mdformat
+      markdownlint-cli
       alejandra
       tex-fmt
       yq-go
