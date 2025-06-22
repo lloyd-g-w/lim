@@ -13,6 +13,9 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
     deps = with pkgs; [
+      # For lazygit plugin
+      lazygit
+
       # VimTex Deps
       tree-sitter
       # nodejs_22
