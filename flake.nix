@@ -29,7 +29,7 @@
       lua-language-server
       svelte-language-server
       jdt-language-server
-      ocamlPackages.ocaml-lsp
+      # ocamlPackages.ocaml-lsp
       typescript-language-server
       vim-language-server
       basedpyright
