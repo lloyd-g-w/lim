@@ -22,7 +22,7 @@ return {
 		})
 		lspconfig.nixd.setup({})
 		lspconfig.ocamllsp.setup({
-			cmd = { "ocamllsp", "--stdio" },
+			cmd = { "ocamllsp" },
 			root_dir = util.root_pattern("dune-project", ".git"),
 			capabilities = caps,
 			settings = {
