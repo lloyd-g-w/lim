@@ -32,6 +32,15 @@ return {
 
 		lspconfig.ocamllsp.setup({
 			cmd = { "ocamllsp", "-stdio" },
+			settings = {
+				ocamllsp = {
+					merlin = {
+						diagnostics = {
+							enable = true,
+						},
+					},
+				},
+			},
 		})
 
 		lspconfig.svelte.setup({
