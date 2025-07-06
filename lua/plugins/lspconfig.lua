@@ -31,7 +31,7 @@ return {
 		lspconfig.nixd.setup({})
 
 		lspconfig.ocamllsp.setup({
-			cmd = { "ocamllsp", "--stdio" },
+			cmd = { "ocamllsp", "-stdio" },
 		})
 
 		lspconfig.svelte.setup({
