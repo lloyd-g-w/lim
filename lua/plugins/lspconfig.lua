@@ -30,12 +30,7 @@ return {
 		})
 		lspconfig.nixd.setup({})
 
-		lspconfig.ocamllsp.setup({
-			cmd = { "ocamllsp", "-stdio" },
-			root_dir = util.root_pattern("dune-project", ".git"),
-			capabilities = caps,
-			positionEncoding = "utf-8",
-		})
+		lspconfig.ocamllsp.setup({})
 
 		lspconfig.svelte.setup({
 			on_attach = function(client, bufnr) end,
