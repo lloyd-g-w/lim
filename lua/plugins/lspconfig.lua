@@ -32,7 +32,8 @@ return {
 
 		lspconfig.ocamllsp.setup({
 			settings = {
-				merlinDiagnostics = { enable = true },
+				-- merlinDiagnostics = { enable = true },
+				duneDiagnostics = { enable = true },
 			},
 		})
 
