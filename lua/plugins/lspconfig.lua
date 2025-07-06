@@ -34,10 +34,8 @@ return {
 			cmd = { "ocamllsp", "-stdio" },
 			settings = {
 				ocamllsp = {
-					merlin = {
-						diagnostics = {
-							enable = true,
-						},
+					merlinDiagnostics = {
+						enable = true,
 					},
 				},
 			},
