@@ -9,6 +9,14 @@ return {
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp hover" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
 
+		vim.diagnostic.config({
+			virtual_text = true,
+			signs = true,
+			underline = true,
+			update_in_insert = false,
+			severity_sort = true,
+		})
+
 		local caps = make_caps()
 		caps.offsetEncoding = { "utf-16" }
 
@@ -26,9 +34,6 @@ return {
 			cmd = { "ocamllsp", "-stdio" },
 			root_dir = util.root_pattern("dune-project", ".git"),
 			capabilities = caps,
-			settings = {
-				ocamllsp = { diagnostics = { enabled = true, onChange = false } },
-			},
 		})
 
 		lspconfig.svelte.setup({
