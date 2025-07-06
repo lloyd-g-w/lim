@@ -14,7 +14,18 @@ return {
 			},
 		})
 		lspconfig.nixd.setup({})
-		lspconfig.ocamllsp.setup({})
+		lspconfig.ocamllsp.setup({
+			cmd = { "ocamllsp", "--stdio" },
+			root_dir = require("lspconfig.util").root_pattern("dune-project", ".git"),
+			settings = {
+				ocamllsp = {
+					diagnostics = {
+						enabled = true,
+						onChange = true, -- publish errors as you type
+					},
+				},
+			},
+		})
 		lspconfig.svelte.setup({
 			on_attach = function(client, bufnr) end,
 		})
