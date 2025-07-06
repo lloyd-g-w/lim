@@ -31,20 +31,7 @@ return {
 		lspconfig.nixd.setup({})
 
 		lspconfig.ocamllsp.setup({
-			settings = {
-				merlinDiagnostics = { enable = true },
-				ocamllsp = {
-					extendedHover = { enable = true },
-					codelens = { enable = true },
-					duneDiagnostics = { enable = true },
-					inlayHints = { enable = true },
-					syntaxDocumentation = { enable = true },
-					merlinJumpCodeActions = { enable = true },
-				},
-				duneDiagnostics = { enable = true },
-				diagnostics = { enable = true },
-				env = { OCAMLLSP_WAIT_FOR_DUNE_RPC = "15000" },
-			},
+			env = { OCAMLLSP_WAIT_FOR_DUNE_RPC = "15000" },
 			log_level = 4,
 		})
 
