@@ -2,9 +2,16 @@ return {
 	"neovim/nvim-lspconfig",
 	config = function()
 		local lspconfig = require("lspconfig")
+		local util = require("lspconfig.util")
+		local make_caps = vim.lsp.protocol.make_client_capabilities
+
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "lsp go to definition" })
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp hover" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
+
+		local caps = make_caps()
+		caps.offsetEncoding = { "utf-16" }
+
 		lspconfig.hls.setup({})
 		-- lspconfig.ccls.setup({})
 		lspconfig.clangd.setup({
@@ -16,12 +23,13 @@ return {
 		lspconfig.nixd.setup({})
 		lspconfig.ocamllsp.setup({
 			cmd = { "ocamllsp", "--stdio" },
-			root_dir = require("lspconfig.util").root_pattern("dune-project", ".git"),
+			root_dir = util.root_pattern("dune-project", ".git"),
+			capabilities = caps,
 			settings = {
 				ocamllsp = {
 					diagnostics = {
 						enabled = true,
-						onChange = true, -- publish errors as you type
+						onChange = true, -- or true if you prefer live errors
 					},
 				},
 			},
