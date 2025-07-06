@@ -34,7 +34,7 @@ return {
 			cmd = { "ocamllsp", "-stdio" },
 			settings = {
 				ocamllsp = {
-					merlinDiagnostics = {
+					duneDiagnostics = {
 						enable = true,
 					},
 				},
