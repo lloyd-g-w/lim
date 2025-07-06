@@ -32,9 +32,8 @@ return {
 
 		lspconfig.ocamllsp.setup({
 			settings = {
-				env = { OCAMLLSP_WAIT_FOR_DUNE_RPC = "15000" },
+				merlinDiagnostics = { enable = true },
 			},
-			log_level = 4,
 		})
 
 		lspconfig.svelte.setup({
