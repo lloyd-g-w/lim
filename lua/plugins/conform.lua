@@ -20,6 +20,7 @@ return {
 				css = { "prettier" },
 				markdown = { "markdownlint" },
 				cpp = { "clang-format" },
+				ocaml = { "ocamlformat" },
 			},
 		})
 
