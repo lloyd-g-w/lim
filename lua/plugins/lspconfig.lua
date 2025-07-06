@@ -31,12 +31,14 @@ return {
 		lspconfig.nixd.setup({})
 
 		lspconfig.ocamllsp.setup({
-			cmd = { "ocamllsp", "-stdio" },
 			settings = {
 				ocamllsp = {
-					duneDiagnostics = {
-						enable = true,
-					},
+					extendedHover = { enable = true },
+					codelens = { enable = true },
+					duneDiagnostics = { enable = true },
+					inlayHints = { enable = true },
+					syntaxDocumentation = { enable = true },
+					merlinJumpCodeActions = { enable = true },
 				},
 			},
 		})
