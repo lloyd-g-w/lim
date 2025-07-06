@@ -31,7 +31,9 @@ return {
 		lspconfig.nixd.setup({})
 
 		lspconfig.ocamllsp.setup({
-			env = { OCAMLLSP_WAIT_FOR_DUNE_RPC = "15000" },
+			settings = {
+				env = { OCAMLLSP_WAIT_FOR_DUNE_RPC = "15000" },
+			},
 			log_level = 4,
 		})
 
