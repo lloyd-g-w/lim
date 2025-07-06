@@ -30,7 +30,9 @@ return {
 		})
 		lspconfig.nixd.setup({})
 
-		lspconfig.ocamllsp.setup({})
+		lspconfig.ocamllsp.setup({
+			cmd = { "ocamllsp", "--stdio" },
+		})
 
 		lspconfig.svelte.setup({
 			on_attach = function(client, bufnr) end,
