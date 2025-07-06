@@ -40,6 +40,8 @@ return {
 					syntaxDocumentation = { enable = true },
 					merlinJumpCodeActions = { enable = true },
 				},
+				duneDiagnostics = { enable = true },
+				diagnostics = { enable = true },
 			},
 			log_level = 4,
 		})
