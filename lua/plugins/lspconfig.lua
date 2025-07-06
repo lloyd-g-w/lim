@@ -41,7 +41,7 @@ return {
 					merlinJumpCodeActions = { enable = true },
 				},
 			},
-			log_level = vim.lsp.log_level.DEBUG,
+			log_level = 4,
 		})
 
 		lspconfig.svelte.setup({
