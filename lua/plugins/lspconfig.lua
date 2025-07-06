@@ -34,6 +34,7 @@ return {
 			cmd = { "ocamllsp", "-stdio" },
 			root_dir = util.root_pattern("dune-project", ".git"),
 			capabilities = caps,
+			positionEncoding = "utf-8",
 		})
 
 		lspconfig.svelte.setup({
