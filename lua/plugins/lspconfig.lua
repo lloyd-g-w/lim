@@ -34,6 +34,7 @@ return {
 			settings = {
 				merlinDiagnostics = { enable = true },
 				-- duneDiagnostics = { enable = true },
+				-- merlinDiagnostics is for the Jane Street fork of ocamllsp
 			},
 		})
 
