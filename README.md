@@ -1,1 +1,1 @@
-# my personal neovim config
+# lim | neovim config
