@@ -38,7 +38,7 @@
       tailwindcss-language-server
       ccls
       # This is also the entirety of clang
-      llvmPackages_20.clang-tools
+      clang-tools
 
       # Formatters
       markdownlint-cli
