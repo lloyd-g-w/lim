@@ -36,9 +36,8 @@
       csharp-ls
       cmake-language-server
       tailwindcss-language-server
-      ccls
       # This is also the entirety of clang
-      clang-tools
+      llvmPackages_21.clang-tools
 
       # Formatters
       markdownlint-cli
