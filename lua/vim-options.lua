@@ -15,7 +15,7 @@ vim.cmd("set nohlsearch")
 -- Keybinds
 
 -- Clearing annoying keybinds
-vim.keymap.del("n", "J")
+vim.keymap.set("n", "<S-j>", "<Nop>")
 
 -- Ctrl-q to exit terminal mode
 vim.api.nvim_set_keymap("t", "<C-q>", "<C-\\><C-n>", { noremap = true, silent = true, desc = "exit terminal mode" })
