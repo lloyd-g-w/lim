@@ -75,6 +75,7 @@
         home.file.".config/nvim".source = self.packages.${system}.limConfig;
         home.packages = self.packages.${system}.limDeps;
         programs.neovim.enable = true;
+        home.sessionVariables.OPEN_DEBUG_AD7 = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7";
       };
     };
   };

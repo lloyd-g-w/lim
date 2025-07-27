@@ -7,11 +7,7 @@ return {
 
 		dapui.setup()
 
-		local cpptools_path = vim.fn.glob(
-			vim.fn.stdpath("data")
-				.. "/nix/store/*-vscode-extension-ms-vscode-cpptools*/share/vscode/extensions/ms-vscode.cpptools"
-		)
-		local open_debug_ad7 = cpptools_path .. "/debugAdapters/bin/OpenDebugAD7"
+		local open_debug_ad7 = os.getenv("OPEN_DEBUG_AD7")
 
 		dap.adapters.cppdbg = {
 			id = "cppdbg",
