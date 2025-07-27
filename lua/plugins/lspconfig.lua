@@ -21,13 +21,13 @@ return {
 		caps.offsetEncoding = { "utf-16" }
 
 		lspconfig.hls.setup({})
-		lspconfig.ccls.setup({})
-		-- lspconfig.clangd.setup({
-		-- 	cmd = {
-		-- 		"clangd",
-		-- 		"--background-index",
-		-- 	},
-		-- })
+		-- lspconfig.ccls.setup({})
+		lspconfig.clangd.setup({
+			cmd = {
+				"clangd",
+				"--background-index",
+			},
+		})
 		lspconfig.nixd.setup({})
 
 		lspconfig.ocamllsp.setup({

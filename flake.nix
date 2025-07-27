@@ -37,8 +37,8 @@
       cmake-language-server
       tailwindcss-language-server
       # This is also the entirety of clang
-      # llvmPackages_21.clang-tools
-      ccls
+      llvmPackages_21.clang-tools
+      # ccls
 
       # Formatters
       markdownlint-cli
