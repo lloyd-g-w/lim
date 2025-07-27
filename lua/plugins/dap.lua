@@ -7,10 +7,16 @@ return {
 
 		dapui.setup()
 
+		local cpptools_path = vim.fn.glob(
+			vim.fn.stdpath("data")
+				.. "/nix/store/*-vscode-extension-ms-vscode-cpptools*/share/vscode/extensions/ms-vscode.cpptools"
+		)
+		local open_debug_ad7 = cpptools_path .. "/debugAdapters/bin/OpenDebugAD7"
+
 		dap.adapters.cppdbg = {
 			id = "cppdbg",
 			type = "executable",
-			command = "/path/to/OpenDebugAD7", -- You must set this path correctly
+			command = open_debug_ad7,
 		}
 
 		dap.configurations.cpp = {
@@ -31,7 +37,7 @@ return {
 					},
 				},
 				miMode = "gdb",
-				miDebuggerPath = "gdb", -- Or the full path to your gdb binary
+				miDebuggerPath = "gdb",
 			},
 		}
 

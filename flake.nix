@@ -53,8 +53,11 @@
       stylua
       nodePackages.prettier
 
-      # Debuggers
+      # Debugger adapters
       vscode-extensions.ms-vscode.cpptools
+
+      # Debuggers
+      gdb
     ];
   in {
     packages.${system} = {
