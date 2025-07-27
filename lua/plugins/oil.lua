@@ -1,5 +1,5 @@
 return {
-	'stevearc/oil.nvim',
+	"stevearc/oil.nvim",
 	---@module 'oil'
 	---@type oil.SetupOpts
 	opts = {},
@@ -9,14 +9,16 @@ return {
 	-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
 	lazy = false,
 	config = function()
-	  require("oil").setup({
-	    default_file_explorer = true,
-	    delete_to_trash = true,
-	    columns = {
-	      "icon",
-	      "size",
-	    },
-
-	  })
+		require("oil").setup({
+			default_file_explorer = true,
+			delete_to_trash = true,
+			columns = {
+				"icon",
+				"size",
+			},
+			keymaps = {
+				["q"] = { "actions.close", mode = "n" },
+			},
+		})
 	end,
 }
