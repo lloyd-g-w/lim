@@ -49,6 +49,9 @@
       jq
       stylua
       nodePackages.prettier
+
+      # Debuggers
+      vscode-extensions.ms-vscode.cpptools
     ];
   in {
     packages.${system} = {
