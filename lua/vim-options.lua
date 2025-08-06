@@ -12,8 +12,6 @@ vim.cmd("set relativenumber")
 vim.cmd("set cursorline")
 vim.cmd("set nohlsearch")
 
-vim.cmd.colorscheme("catppuccin")
-
 -- Keybinds
 
 -- Clearing annoying keybinds
