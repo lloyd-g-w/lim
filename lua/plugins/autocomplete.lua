@@ -24,10 +24,14 @@ return {
 					-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 				end,
 			},
-
 			window = {
-				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
+				completion = cmp.config.window.bordered({
+					border = "rounded",
+					winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+				}),
+				documentation = cmp.config.window.bordered({
+					border = "rounded",
+				}),
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -56,10 +60,6 @@ return {
 		local i = ls.insert_node
 		local d = ls.dynamic_node
 		local sn = ls.snippet_node
-
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-		vim.lsp.handlers["textDocument/signatureHelp"] =
-			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 		-- CUSTOM SNIPPETS
 		local c_type_snips = {
