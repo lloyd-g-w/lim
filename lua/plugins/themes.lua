@@ -48,6 +48,7 @@ return {
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
+				auto_integrations = true,
 				flavour = "frappe", -- latte, frappe, macchiato, mocha
 			})
 			vim.cmd.colorscheme("catppuccin")
