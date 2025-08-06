@@ -45,10 +45,13 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		priority = 1100,
+		priority = 1500,
 		config = function()
 			require("catppuccin").setup({
 				auto_integrations = true,
+				integrations = {
+					lualine = true,
+				},
 				flavour = "frappe", -- latte, frappe, macchiato, mocha
 			})
 			vim.cmd.colorscheme("catppuccin")
