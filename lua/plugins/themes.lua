@@ -49,9 +49,6 @@ return {
 		config = function()
 			require("catppuccin").setup({
 				auto_integrations = true,
-				integrations = {
-					lualine = true,
-				},
 				flavour = "frappe", -- latte, frappe, macchiato, mocha
 			})
 			vim.cmd.colorscheme("catppuccin")
