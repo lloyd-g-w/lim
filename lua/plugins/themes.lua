@@ -8,7 +8,6 @@ return {
 			-- vim.g.gruvbox_material_background = "soft"
 			-- vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
 			-- vim.cmd([[colorscheme gruvbox-material]])
-			-- vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 	{
