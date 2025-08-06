@@ -8,6 +8,7 @@ return {
 			-- vim.g.gruvbox_material_background = "soft"
 			-- vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
 			-- vim.cmd([[colorscheme gruvbox-material]])
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 	{
@@ -45,19 +46,12 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		priority = 1500,
+		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
 				auto_integrations = true,
 				flavour = "frappe", -- latte, frappe, macchiato, mocha
 			})
-			vim.cmd.colorscheme("catppuccin")
 		end,
-	},
-	{
-		"sainnhe/gruvbox-material",
-		priority = 1000,
-		config = true,
-		opts = ...,
 	},
 }

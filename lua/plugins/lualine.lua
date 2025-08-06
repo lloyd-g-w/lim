@@ -6,7 +6,7 @@ return {
 		require("lualine").setup({
 			options = {
 				-- theme = "gruvbox-material",
-				theme = 'catppuccin',
+				theme = "catppuccin",
 				section_separators = { "" },
 				component_separators = { "" },
 			},
