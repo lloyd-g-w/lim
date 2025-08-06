@@ -1,14 +1,15 @@
 return {
-    'nvim-lualine/lualine.nvim',
+	"nvim-lualine/lualine.nvim",
 
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-        require('lualine').setup({
-            options = {
-                theme = 'catppuccin',
-                section_separators = { '' },
-                component_separators = { '' },
-            },
-        });
-    end
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	config = function()
+		require("lualine").setup({
+			options = {
+				theme = "gruvbox-material",
+				-- theme = 'catppuccin',
+				section_separators = { "" },
+				component_separators = { "" },
+			},
+		})
+	end,
 }
