@@ -6,11 +6,7 @@ return {
 		local make_caps = vim.lsp.protocol.make_client_capabilities
 
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "lsp go to definition" })
-
-		vim.o.winborder = "rounded"
-
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover with border" })
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp hover" })
+		vim.keymap.set("n", "K", vim.lsp.buf.hover({ border = "rounded" }), { desc = "lsp hover" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
 
 		vim.diagnostic.config({
