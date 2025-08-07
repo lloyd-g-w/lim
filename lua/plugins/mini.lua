@@ -9,6 +9,6 @@ return {
 		require("mini.extra").setup({})
 		require("mini.hipatterns").setup({})
 		require("mini.cursorword").setup({})
-		-- require("mini.move").setup({})
+		require("mini.move").setup({})
 	end,
 }
