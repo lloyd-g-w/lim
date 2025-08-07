@@ -113,8 +113,8 @@ return {
 			"iurimateus/luasnip-latex-snippets.nvim",
 		},
 		config = function()
-			-- Enable auto start and desired clients
-			vim.g.coq_settings = {
+			-- Initialize COQ with desired settings
+			require("coq")({
 				auto_start = true,
 				clients = {
 					lsp = { enabled = true },
@@ -122,15 +122,19 @@ return {
 					path = { enabled = true },
 					snippets = { enabled = true, engine = "luasnip" },
 				},
-			}
+				keymap = {
+					eval_snips = "<C-K>",
+					prev = "<S-Tab>",
+					next = "<Tab>",
+					select = "<CR>",
+				},
+			})
 
-			-- Lazy-loading handled by plugin; no direct require
-
-			-- Load snippets
+			-- VSCode and Lua snippets
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip.loaders.from_lua").load()
 
-			-- Custom snippets for C/C++/Java
+			-- Custom C/C++/Java snippets
 			local ls = require("luasnip")
 			local s, t, i, d, sn = ls.snippet, ls.text_node, ls.insert_node, ls.dynamic_node, ls.snippet_node
 			local header = s("cheadercomment", {
