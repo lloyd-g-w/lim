@@ -102,71 +102,79 @@
 -- }
 
 return {
-	{
-		"ms-jpq/coq_nvim",
-		build = ":COQdeps",
-		dependencies = {
-			{ "ms-jpq/coq.artifacts", build = ":COQdeps" },
-			{ "ms-jpq/coq.thirdparty", module = "coq_3p" },
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			"iurimateus/luasnip-latex-snippets.nvim",
-		},
-		config = function()
-			-- Initialize COQ with desired settings
-			require("coq")({
-				auto_start = true,
-				clients = {
-					lsp = { enabled = true },
-					buffer = { enabled = true },
-					path = { enabled = true },
-					snippets = { enabled = true, engine = "luasnip" },
-				},
-				keymap = {
-					eval_snips = "<C-K>",
-					prev = "<S-Tab>",
-					next = "<Tab>",
-					select = "<CR>",
-				},
-			})
+  {
+    'ms-jpq/coq_nvim',
+    build = ':COQdeps',
+    dependencies = {
+      { 'ms-jpq/coq.artifacts', build = ':COQdeps' },
+      { 'ms-jpq/coq.thirdparty', module = 'coq_3p' },
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+      'iurimateus/luasnip-latex-snippets.nvim',
+    },
+    config = function()
+      -- Grab Frappe palette for menu colors
+      local cp = require('catppuccin.palettes').get_palette('frappe')
 
-			-- VSCode and Lua snippets
-			require("luasnip.loaders.from_vscode").lazy_load()
-			require("luasnip.loaders.from_lua").load()
+      -- Configure and start COQ
+      local coq = require('coq')({
+        auto_start = false,            -- we'll start manually
+        clients = {
+          lsp      = { enabled = true },
+          buffer   = { enabled = true },
+          path     = { enabled = true },
+          snippets = { enabled = true, engine = 'luasnip' },
+        },
+        keymap = {
+          eval_snips = '<C-K>',
+          prev       = '<S-Tab>',
+          next       = '<Tab>',
+          select     = '<CR>',
+        },
+        display = {
+          colors = {
+            normal    = { fg = cp.text,    bg = cp.base },
+            selected  = { fg = cp.peach,   bg = cp.surface1 },
+            border    = { fg = cp.surface2, bg = cp.none    },
+          },
+        },
+      })
+      -- Start COQ on demand (e.g. InsertEnter)
+      vim.api.nvim_create_autocmd('InsertEnter', { callback = function() coq.COQNow() end })
 
-			-- Custom C/C++/Java snippets
-			local ls = require("luasnip")
-			local s, t, i, d, sn = ls.snippet, ls.text_node, ls.insert_node, ls.dynamic_node, ls.snippet_node
-			local header = s("cheadercomment", {
-				t("// Lloyd Williams (z5599988) | " .. os.date("%d/%m/%Y ")),
-				t({ "", "// Description: " }),
-			})
-			local bigc = s("bigcomment", {
-				t("// " .. string.rep("=", 20) .. " "),
-				i(1),
-				t(" " .. string.rep("=", 20) .. " //"),
-			})
-			ls.add_snippets("c", { header, bigc })
-			ls.add_snippets("cpp", { header, bigc })
-			ls.add_snippets("java", { bigc })
+      -- Load VSCode/LuaSnip snippets
+      require('luasnip.loaders.from_vscode').lazy_load()
+      require('luasnip.loaders.from_lua').load()
 
-			-- TeX snippets
-			local in_mathzone = function()
-				return vim.fn["vimtex#syntax#in_mathzone"]() == 1
-			end
-			ls.add_snippets("tex", {
-				s(
-					{ trig = "bf", snippetType = "autosnippet" },
-					d(1, function()
-						if in_mathzone() then
-							return sn(nil, { t("\\mathbf ") })
-						else
-							return sn(nil, { t("\\textbf ") })
-						end
-					end)
-				),
-				s({ trig = "bb", snippetType = "autosnippet" }, { t("\\mathbb ") }),
-			})
-		end,
-	},
+      -- Custom C/C++/Java snippets
+      local ls = require('luasnip')
+      local s, t, i, d, sn = ls.snippet, ls.text_node, ls.insert_node, ls.dynamic_node, ls.snippet_node
+      local header = s('cheadercomment', {
+        t('// Lloyd Williams (z5599988) | ' .. os.date('%d/%m/%Y ')),
+        t({ '', '// Description: ' }),
+      })
+      local bigc = s('bigcomment', {
+        t('// ' .. string.rep('=',20) .. ' '), i(1), t(' ' .. string.rep('=',20) .. ' //'),
+      })
+      ls.add_snippets('c', { header, bigc })
+      ls.add_snippets('cpp', { header, bigc })
+      ls.add_snippets('java', { bigc })
+
+      -- TeX Math snippets
+      local in_mathzone = function() return vim.fn['vimtex#syntax#in_mathzone']() == 1 end
+      ls.add_snippets('tex', {
+        s({ trig = 'bf', snippetType = 'autosnippet' },
+          d(1, function()
+            if in_mathzone() then
+              return sn(nil, { t('\\mathbf ') })
+            else
+              return sn(nil, { t('\\textbf ') })
+            end
+          end)
+        ),
+        s({ trig = 'bb', snippetType = 'autosnippet' }, { t('\\mathbb ') }),
+      })
+    end,
+  },
 }
+
