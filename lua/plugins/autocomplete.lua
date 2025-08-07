@@ -132,7 +132,7 @@ return {
 					select = "<CR>",
 				},
 				display = {
-					pum = {
+					preview = {
 						border = "rounded",
 						position = "center",
 						format = function(completion)
@@ -149,6 +149,9 @@ return {
 							border = { fg = cp.surface2, bg = cp.base },
 						},
 					},
+					-- The 'pum' table is now for text-flow settings like `ellipsis`
+					-- and can be left empty if you don't need to change its defaults.
+					pum = {},
 				},
 			}
 		end,
