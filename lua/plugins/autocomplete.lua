@@ -112,9 +112,10 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"iurimateus/luasnip-latex-snippets.nvim",
 		},
-		config = function()
-			-- COQ setup
-			require("coq_nvim").setup({
+		init = function()
+			local cp = require("catppuccin.palettes").get_palette("frappe")
+
+			vim.g.coq_settings = {
 				auto_start = "shut-up",
 				clients = {
 					lsp = { enabled = true, min_chars = 1 },
@@ -122,32 +123,21 @@ return {
 					path = { enabled = true, min_chars = 1 },
 					snippets = { enabled = true, engine = "luasnip", min_chars = 1 },
 				},
-				keymap = {
-					eval_snips = "<C-K>",
-					-- only supported keymap entries:
-					bigger_preview = nil,
-					jump_to_mark = nil,
-					manual_complete = nil,
-					manual_complete_insertion_only = false,
-					pre_select = false,
-					recommended = true,
-				},
-			})
-
+			}
+		end,
+		config = function()
 			-- Snippet loading
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip.loaders.from_lua").load()
 
-			-- Custom snippets
+			-- Your custom snippets (unchanged)
 			local ls = require("luasnip")
 			local s, t, i, d, sn = ls.snippet, ls.text_node, ls.insert_node, ls.dynamic_node, ls.snippet_node
 
-			-- Header comment snippet
 			local header = s("cheadercomment", {
 				t("// Lloyd Williams (z5599988) | " .. os.date("%d/%m/%Y ")),
 				t({ "", "// Description: " }),
 			})
-			-- Big comment snippet
 			local bigc = s("bigcomment", {
 				t("// " .. string.rep("=", 20) .. " "),
 				i(1),
@@ -157,7 +147,6 @@ return {
 			ls.add_snippets("cpp", { header, bigc })
 			ls.add_snippets("java", { bigc })
 
-			-- TeX snippets
 			local in_mathzone = function()
 				return vim.fn["vimtex#syntax#in_mathzone"]() == 1
 			end
