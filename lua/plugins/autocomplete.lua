@@ -118,10 +118,10 @@ return {
 			vim.g.coq_settings = {
 				auto_start = "shut-up",
 				clients = {
-					lsp = { enabled = true, min_chars = 1 },
-					buffer = { enabled = true, min_chars = 1 },
-					path = { enabled = true, min_chars = 1 },
-					snippets = { enabled = true, engine = "luasnip", min_chars = 1 },
+					lsp = { enabled = true },
+					buffer = { enabled = true },
+					path = { enabled = true },
+					snippets = { enabled = true, engine = "luasnip" },
 				},
 			}
 		end,
