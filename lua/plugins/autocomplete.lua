@@ -124,10 +124,7 @@ return {
 					snippets = { enabled = true, engine = "luasnip", min_chars = 1 },
 				},
 				keymap = {
-					eval_snips = "<C-K>",
-					prev = "<S-Tab>",
-					next = "<Tab>",
-					select = "<CR>",
+					recommended = true,
 				},
 			}
 		end,
