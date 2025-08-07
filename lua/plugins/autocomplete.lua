@@ -24,15 +24,15 @@ return {
 					-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 				end,
 			},
-			window = {
-				completion = cmp.config.window.bordered({
-					border = "rounded",
-					winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
-				}),
-				documentation = cmp.config.window.bordered({
-					border = "rounded",
-				}),
-			},
+			-- window = {
+			-- 	completion = cmp.config.window.bordered({
+			-- 		border = "rounded",
+			-- 		winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+			-- 	}),
+			-- 	documentation = cmp.config.window.bordered({
+			-- 		border = "rounded",
+			-- 	}),
+			-- },
 			mapping = cmp.mapping.preset.insert({
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
