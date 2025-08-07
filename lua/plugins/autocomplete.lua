@@ -26,12 +26,10 @@ return {
 			},
 			window = {
 				completion = cmp.config.window.bordered({
-					side_padding = 0.5,
 					border = "rounded",
 					winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
 				}),
 				documentation = cmp.config.window.bordered({
-					side_padding = 0.5,
 					border = "rounded",
 				}),
 			},

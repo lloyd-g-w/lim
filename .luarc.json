@@ -4,6 +4,7 @@
         "build"
     ],
     "diagnostics.disable": [
-        "inject-field"
+        "inject-field",
+        "param-type-mismatch"
     ]
 }

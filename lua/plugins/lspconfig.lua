@@ -7,11 +7,9 @@ return {
 
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "lsp go to definition" })
 
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-			vim.lsp.handlers.hover,
-			{ border = "rounded" } -- or "single", "double", "shadow"
-		)
+		vim.o.winborder = "rounded"
 
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover with border" })
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp hover" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
 
