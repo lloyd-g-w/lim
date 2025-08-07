@@ -125,7 +125,7 @@ return {
 			local coq = require("coq")({
 				clients = {
 					lsp = { enabled = true },
-					buffer = { enabled = true },
+					buffer = { enabled = true, min_chars = 1 },
 					path = { enabled = true },
 					snippets = { enabled = true, engine = "luasnip" },
 				},
@@ -157,8 +157,6 @@ return {
 					},
 				},
 			})
-
-			-- REMOVED: The autocmd for COQNow() is no longer needed with auto_start = true.
 
 			-- Load VSCode/LuaSnip snippets
 			require("luasnip.loaders.from_vscode").lazy_load()
