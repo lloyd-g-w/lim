@@ -116,8 +116,7 @@ return {
 			local cp = require("catppuccin.palettes").get_palette("frappe")
 
 			vim.g.coq_settings = {
-				auto_start = true,
-				notify = false,
+				auto_start = "shut-up",
 				clients = {
 					lsp = { enabled = true, min_chars = 1 },
 					buffer = { enabled = true, min_chars = 1 },
