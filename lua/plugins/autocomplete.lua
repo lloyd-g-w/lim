@@ -114,7 +114,7 @@ return {
 		},
 		config = function()
 			-- COQ setup
-			require("coq").setup({
+			require("coq_nvim").setup({
 				auto_start = "shut-up",
 				clients = {
 					lsp = { enabled = true, min_chars = 1 },
