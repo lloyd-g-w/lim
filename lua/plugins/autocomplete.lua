@@ -132,20 +132,22 @@ return {
 					select = "<CR>",
 				},
 				display = {
-					border = "rounded",
-					position = "center",
-					format = function(completion)
-						local fmt = {
-							completion.kind_icon or "",
-							completion.label,
-							completion.menu or "",
-						}
-						return table.concat(fmt, " ")
-					end,
-					colors = {
-						normal = { fg = cp.text, bg = cp.base },
-						selected = { fg = cp.peach, bg = cp.surface1 },
-						border = { fg = cp.surface2, bg = cp.base },
+					pum = {
+						border = "rounded",
+						position = "center",
+						format = function(completion)
+							local fmt = {
+								completion.kind_icon or "",
+								completion.label,
+								completion.menu or "",
+							}
+							return table.concat(fmt, " ")
+						end,
+						colors = {
+							normal = { fg = cp.text, bg = cp.base },
+							selected = { fg = cp.peach, bg = cp.surface1 },
+							border = { fg = cp.surface2, bg = cp.base },
+						},
 					},
 				},
 			}
