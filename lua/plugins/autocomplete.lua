@@ -102,72 +102,83 @@
 -- }
 
 return {
-  {
-    "ms-jpq/coq_nvim",
-    branch = "coq",
-    build = ":COQdeps",
-    dependencies = {
-      { "ms-jpq/coq.artifacts", branch = "artifacts", build = ":COQdeps" },
-      { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
-      "onsails/lspkind.nvim",
-      "rafamadriz/friendly-snippets",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-      "iurimateus/luasnip-latex-snippets.nvim",
-    },
-    config = function()
-      -- Coq settings via global (supported branch)
-      vim.g.coq_settings = { auto_start = true, clients = { lsp = {enabled = true} } }
+	{
+		"ms-jpq/coq_nvim",
+		build = ":COQdeps",
+		dependencies = {
+			{ "ms-jpq/coq.artifacts", build = ":COQdeps" },
+			{ "ms-jpq/coq.thirdparty", module = "coq_3p" },
+			"onsails/lspkind.nvim",
+			"rafamadriz/friendly-snippets",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			"iurimateus/luasnip-latex-snippets.nvim",
+		},
+		config = function()
+			-- Coq minimal global settings
+			vim.g.coq_settings = {
+				auto_start = true,
+				clients = {
+					lsp = { enabled = true },
+					buffer = { enabled = true },
+					path = { enabled = true },
+					snippets = { enabled = true, engine = "luasnip" },
+				},
+			}
+			-- Load COQ plugin
+			require("coq")
 
-      -- Load after setting globals
-      require("coq").COQnow()
+			-- Load snippets
+			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_lua").load()
 
-      -- VSCode and LuaSnip snippet loading
-      require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip.loaders.from_lua").load()
+			-- lspkind integration for 3p source
+			require("coq_3p").register({
+				lspkind = {
+					with_text = true,
+					maxwidth = 35,
+					menu = {
+						buffer = "[Buffer]",
+						lsp = "[LSP]",
+						luasnip = "[LuaSnip]",
+						latex_symbols = "[Latex]",
+						path = "[Path]",
+					},
+				},
+			})
 
-      -- lspkind for 3p source
-      require("coq_3p").register({
-        lspkind = {
-          with_text = true,
-          maxwidth = 35,
-          menu = {
-            buffer = "[Buffer]",
-            lsp = "[LSP]",
-            luasnip = "[LuaSnip]",
-            latex_symbols = "[Latex]",
-            path = "[Path]",
-          },
-        },
-      })
+			-- Custom snippets (C/C++/Java/TeX)
+			local ls = require("luasnip")
+			local s, t, i, d, sn = ls.snippet, ls.text_node, ls.insert_node, ls.dynamic_node, ls.snippet_node
+			local header = s("cheadercomment", {
+				t("// Lloyd Williams (z5599988) | Written on " .. os.date("%d/%m/%Y ")),
+				t({ "", "// Description: " }),
+			})
+			local bigc = s("bigcomment", {
+				t("// " .. string.rep("=", 20) .. " "),
+				i(1),
+				t(" " .. string.rep("=", 20) .. " //"),
+			})
+			ls.add_snippets("c", { header, bigc })
+			ls.add_snippets("cpp", { header, bigc })
+			ls.add_snippets("java", { bigc })
 
-      -- Custom snippets (C/C++/Java/TeX)
-      local ls = require("luasnip")
-      local s, t, i, d, sn = ls.snippet, ls.text_node, ls.insert_node, ls.dynamic_node, ls.snippet_node
-      local header = s("cheadercomment", {
-        t("// Lloyd Williams (z5599988) | Written on " .. os.date("%d/%m/%Y ")),
-        t({"", "// Description: "}),
-      })
-      local bigc = s("bigcomment", {
-        t("// " .. string.rep("=",20) .. " "), i(1), t(" " .. string.rep("=",20) .. " //"),
-      })
-      ls.add_snippets("c", { header, bigc })
-      ls.add_snippets("cpp", { header, bigc })
-      ls.add_snippets("java", { bigc })
-
-      local in_mathzone = function()
-        return vim.fn["vimtex#syntax#in_mathzone"]() == 1
-      end
-      ls.add_snippets("tex", {
-        s({ trig = "bf", snippetType = "autosnippet" },
-          d(1, function()
-            if in_mathzone() then return sn(nil, { t("\\mathbf ") })
-            else return sn(nil, { t("\\textbf ") }) end
-          end)
-        ),
-        s({ trig = "bb", snippetType = "autosnippet" }, { t("\\mathbb ") }),
-      })
-    end,
-  },
+			local in_mathzone = function()
+				return vim.fn["vimtex#syntax#in_mathzone"]() == 1
+			end
+			ls.add_snippets("tex", {
+				s(
+					{ trig = "bf", snippetType = "autosnippet" },
+					d(1, function()
+						if in_mathzone() then
+							return sn(nil, { t("\\mathbf ") })
+						else
+							return sn(nil, { t("\\textbf ") })
+						end
+					end)
+				),
+				s({ trig = "bb", snippetType = "autosnippet" }, { t("\\mathbb ") }),
+			})
+		end,
+	},
 }
-
