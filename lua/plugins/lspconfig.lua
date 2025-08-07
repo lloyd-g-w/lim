@@ -6,6 +6,12 @@ return {
 		local make_caps = vim.lsp.protocol.make_client_capabilities
 
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "lsp go to definition" })
+
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+			vim.lsp.handlers.hover,
+			{ border = "rounded" } -- or "single", "double", "shadow"
+		)
+
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "lsp hover" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
 
