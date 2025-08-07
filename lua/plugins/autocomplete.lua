@@ -151,7 +151,7 @@ return {
 			}
 		end,
 		config = function()
-			require("coq").setup()
+			require("coq")()
 
 			-- Snippet loading
 			require("luasnip.loaders.from_vscode").lazy_load()
