@@ -119,7 +119,6 @@ return {
 				auto_start = true,
 				notify = false,
 				clients = {
-					-- MODIFIED: Added min_chars to all clients
 					lsp = { enabled = true, min_chars = 1 },
 					buffer = { enabled = true, min_chars = 1 },
 					path = { enabled = true, min_chars = 1 },
@@ -131,33 +130,9 @@ return {
 					next = "<Tab>",
 					select = "<CR>",
 				},
-				display = {
-					preview = {
-						border = "rounded",
-						position = "center",
-						format = function(completion)
-							local fmt = {
-								completion.kind_icon or "",
-								completion.label,
-								completion.menu or "",
-							}
-							return table.concat(fmt, " ")
-						end,
-						colors = {
-							normal = { fg = cp.text, bg = cp.base },
-							selected = { fg = cp.peach, bg = cp.surface1 },
-							border = { fg = cp.surface2, bg = cp.base },
-						},
-					},
-					-- The 'pum' table is now for text-flow settings like `ellipsis`
-					-- and can be left empty if you don't need to change its defaults.
-					pum = {},
-				},
 			}
 		end,
 		config = function()
-			require("coq")()
-
 			-- Snippet loading
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip.loaders.from_lua").load()
@@ -165,6 +140,7 @@ return {
 			-- Your custom snippets (unchanged)
 			local ls = require("luasnip")
 			local s, t, i, d, sn = ls.snippet, ls.text_node, ls.insert_node, ls.dynamic_node, ls.snippet_node
+
 			local header = s("cheadercomment", {
 				t("// Lloyd Williams (z5599988) | " .. os.date("%d/%m/%Y ")),
 				t({ "", "// Description: " }),
