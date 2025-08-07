@@ -113,21 +113,16 @@ return {
 			"iurimateus/luasnip-latex-snippets.nvim",
 		},
 		init = function()
-			vim.g.coq_settings = {
-				auto_start = true,
-			}
-		end,
-		config = function()
-			-- Grab Frappe palette for menu colors
 			local cp = require("catppuccin.palettes").get_palette("frappe")
 
-			-- Configure and start COQ
-			local coq = require("coq")({
+			vim.g.coq_settings = {
+				auto_start = true,
 				clients = {
-					lsp = { enabled = true },
+					-- MODIFIED: Added min_chars to all clients
+					lsp = { enabled = true, min_chars = 1 },
 					buffer = { enabled = true, min_chars = 1 },
-					path = { enabled = true },
-					snippets = { enabled = true, engine = "luasnip" },
+					path = { enabled = true, min_chars = 1 },
+					snippets = { enabled = true, engine = "luasnip", min_chars = 1 },
 				},
 				keymap = {
 					eval_snips = "<C-K>",
@@ -136,33 +131,32 @@ return {
 					select = "<CR>",
 				},
 				display = {
-					-- NEW: Use rounded borders for a modern look. Other options: "single", "double", "solid"
 					border = "rounded",
-					-- NEW: Center the menu under the cursor.
 					position = "center",
-					-- NEW: Customize how each completion item is displayed.
-					-- This adds an icon, the label, and extra info (like [LSP]) on one line.
 					format = function(completion)
 						local fmt = {
-							completion.kind_icon or "", -- The icon (e.g.,  for function)
-							completion.label, -- The completion text itself
-							completion.menu or "", -- Extra info (e.g., [LSP], [Snippet])
+							completion.kind_icon or "",
+							completion.label,
+							completion.menu or "",
 						}
 						return table.concat(fmt, " ")
 					end,
 					colors = {
 						normal = { fg = cp.text, bg = cp.base },
 						selected = { fg = cp.peach, bg = cp.surface1 },
-						border = { fg = cp.surface2, bg = cp.base }, -- Changed bg to match normal
+						border = { fg = cp.surface2, bg = cp.base },
 					},
 				},
-			})
+			}
+		end,
+		config = function()
+			require("coq").setup()
 
-			-- Load VSCode/LuaSnip snippets
+			-- Snippet loading
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip.loaders.from_lua").load()
 
-			-- Custom C/C++/Java snippets (your snippets are unchanged)
+			-- Your custom snippets (unchanged)
 			local ls = require("luasnip")
 			local s, t, i, d, sn = ls.snippet, ls.text_node, ls.insert_node, ls.dynamic_node, ls.snippet_node
 			local header = s("cheadercomment", {
@@ -178,7 +172,6 @@ return {
 			ls.add_snippets("cpp", { header, bigc })
 			ls.add_snippets("java", { bigc })
 
-			-- TeX Math snippets (your snippets are unchanged)
 			local in_mathzone = function()
 				return vim.fn["vimtex#syntax#in_mathzone"]() == 1
 			end
