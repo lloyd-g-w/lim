@@ -117,6 +117,7 @@ return {
 
 			vim.g.coq_settings = {
 				auto_start = true,
+				notify = false,
 				clients = {
 					-- MODIFIED: Added min_chars to all clients
 					lsp = { enabled = true, min_chars = 1 },
