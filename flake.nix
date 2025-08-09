@@ -113,13 +113,14 @@
       }: {
         programs.home-manager.enable = true;
 
-        # Source the neovim configuration from this flake.
-        # By using `perSystemOutputs` instead of `self`, we avoid the evaluation error.
-        home.file.".config/nvim".source = perSystemOutputs.packages.${pkgs.system}.neovim-config;
-
+        nixpkgs.config.allowUnfree = true;
         nixpkgs.config.permittedInsecurePackages = [
           "libsoup-2.74.3"
         ];
+
+        # Source the neovim configuration from this flake.
+        # By using `perSystemOutputs` instead of `self`, we avoid the evaluation error.
+        home.file.".config/nvim".source = perSystemOutputs.packages.${pkgs.system}.neovim-config;
 
         # Install all dependency packages into the user's profile.
         home.packages = getNeovimDeps pkgs;
