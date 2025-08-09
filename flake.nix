@@ -117,6 +117,10 @@
         # By using `perSystemOutputs` instead of `self`, we avoid the evaluation error.
         home.file.".config/nvim".source = perSystemOutputs.packages.${pkgs.system}.neovim-config;
 
+        nixpkgs.config.permittedInsecurePackages = [
+          "libsoup-2.74.3"
+        ];
+
         # Install all dependency packages into the user's profile.
         home.packages = getNeovimDeps pkgs;
 
