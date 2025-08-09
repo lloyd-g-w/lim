@@ -3,12 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # flake-utils provides helper functions to make flakes portable across systems
     flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
-    self,
     nixpkgs,
     flake-utils,
     ...
@@ -57,9 +55,10 @@
         # Debuggers
         gdb
       ];
-  in
-    # Use flake-utils to generate outputs for common systems (x86_64-linux, aarch64-linux, etc.)
-    flake-utils.lib.eachDefaultSystem (
+
+    # We first generate all the per-system outputs using flake-utils.
+    # We store this in a variable `perSystemOutputs` to avoid recursive `self` references later.
+    perSystemOutputs = flake-utils.lib.eachDefaultSystem (
       system: let
         # Import nixpkgs for the current system, allowing unfree packages
         pkgs = import nixpkgs {
@@ -70,9 +69,16 @@
         # Get the list of dependencies for the current system
         deps = getNeovimDeps pkgs;
 
+        # Package the neovim configuration directory itself.
+        neovim-config-pkg = ./.;
+
         # A helper variable for the cpptools path for clarity
         cppToolsPath = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools";
       in {
+        # Package the neovim configuration directory itself.
+        # This makes it a clean, referenceable build artifact.
+        packages.neovim-config = neovim-config-pkg;
+
         # Development shell, accessible via `nix develop`
         devShells.default = pkgs.mkShell {
           name = "neovim-dev-shell";
@@ -84,16 +90,19 @@
           shellHook = ''
             # Set environment variables required by plugins
             export OPEN_DEBUG_AD7="${cppToolsPath}/debugAdapters/bin/OpenDebugAD7"
+
+            # Create an alias so that running `nvim` in the shell uses this flake's configuration.
+            # This assumes your entry point is init.lua. Change to init.vim if needed.
+            alias nvim='nvim -u ${neovim-config-pkg}/init.lua'
+
             echo "Neovim dev shell activated."
-            echo "Run 'nvim' to start."
           '';
         };
-
-        # Package the neovim configuration directory itself.
-        # This makes it a clean, referenceable build artifact.
-        packages.neovim-config = ./.;
       }
-    )
+    );
+  in
+    # We merge the per-system outputs with the system-independent home-manager module.
+    perSystemOutputs
     // {
       # Home Manager module, defined outside the per-system loop.
       # It can be imported into any home-manager configuration.
@@ -105,8 +114,8 @@
         programs.home-manager.enable = true;
 
         # Source the neovim configuration from this flake.
-        # It correctly references the package for the system home-manager is building for.
-        home.file.".config/nvim".source = self.packages.${pkgs.system}.neovim-config;
+        # By using `perSystemOutputs` instead of `self`, we avoid the evaluation error.
+        home.file.".config/nvim".source = perSystemOutputs.packages.${pkgs.system}.neovim-config;
 
         # Install all dependency packages into the user's profile.
         home.packages = getNeovimDeps pkgs;
