@@ -97,6 +97,23 @@
             echo "Neovim dev shell activated."
           '';
         };
+
+        apps = let
+          limApp = pkgs.writeShellApplication {
+            name = "lim";
+            runtimeInputs = [pkgs.neovim] ++ deps;
+            # "$@" adds all the args
+            text = ''
+              export OPEN_DEBUG_AD7="${cppToolsPath}/debugAdapters/bin/OpenDebugAD7"
+              exec nvim --cmd "set rtp^=${neovim-config-pkg}" "$@"
+            '';
+          };
+        in {
+          default = {
+            type = "app";
+            program = "${limApp}/bin/lim";
+          };
+        };
       }
     );
   in
