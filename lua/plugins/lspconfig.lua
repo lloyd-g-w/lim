@@ -32,6 +32,7 @@ return {
 			},
 		})
 		lspconfig.nixd.setup({})
+		lspconfig.rust_analyzer.setup({})
 
 		lspconfig.ocamllsp.setup({
 			settings = {
