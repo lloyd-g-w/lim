@@ -45,7 +45,16 @@ return {
 		lspconfig.svelte.setup({
 			on_attach = function(client, bufnr) end,
 		})
-		lspconfig.tinymist.setup({}) -- Typst
+		lspconfig.tinymist.setup({
+			settings = {
+				tinymist = {
+					formatterMode = "typstyle", -- use typstyle inside Tinymist
+					formatterPrintWidth = 80, -- line width
+					formatterIndentSize = 2, -- indent
+					formatterProseWrap = true, -- wrap prose at print width
+				},
+			},
+		}) -- Typst
 		lspconfig.csharp_ls.setup({})
 		lspconfig.ts_ls.setup({})
 		lspconfig.basedpyright.setup({})
