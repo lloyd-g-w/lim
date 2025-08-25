@@ -21,6 +21,7 @@ return {
 				markdown = { "markdownlint" },
 				cpp = { "clang-format" },
 				ocaml = { "ocamlformat" },
+				typst = { "typstyle" },
 			},
 		})
 
