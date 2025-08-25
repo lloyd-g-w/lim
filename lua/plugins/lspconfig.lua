@@ -47,12 +47,10 @@ return {
 		})
 		lspconfig.tinymist.setup({
 			settings = {
-				tinymist = {
-					formatterMode = "typstyle", -- use typstyle inside Tinymist
-					formatterPrintWidth = 80, -- line width
-					formatterIndentSize = 2, -- indent
-					formatterProseWrap = true, -- wrap prose at print width
-				},
+				formatterMode = "typstyle", -- use typstyle inside Tinymist
+				formatterPrintWidth = 80, -- line width
+				formatterIndentSize = 2, -- indent
+				formatterProseWrap = true, -- wrap prose at print width
 			},
 		}) -- Typst
 		lspconfig.csharp_ls.setup({})
