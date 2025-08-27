@@ -43,6 +43,7 @@
         # ccls # Alternative to clangd
 
         # Formatters
+        tex-fmt
         markdownlint-cli
         alejandra # For Nix
         yq-go
