@@ -108,6 +108,19 @@ return {
 			}),
 		})
 
+		ls.add_snippets("typ", {
+			s({ trig = "mk", snippetType = "autosnippet" }, {
+				t("$"),
+				i(1),
+				t("$"),
+			}),
+			s({ trig = "dm", snippetType = "autosnippet" }, {
+				t("$ "),
+				i(1),
+				t(" $"),
+			}),
+		})
+
 		require("luasnip.loaders.from_lua").load()
 
 		-- END CUSTOM SNIPPETS
