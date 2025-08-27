@@ -108,7 +108,7 @@ return {
 			}),
 		})
 
-		ls.add_snippets("typ", {
+		ls.add_snippets("typst", {
 			s({ trig = "mk", snippetType = "autosnippet" }, {
 				t("$"),
 				i(1),
