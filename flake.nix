@@ -37,10 +37,11 @@
         csharp-ls
         cmake-language-server
         tailwindcss-language-server
-        rust-analyzer
         tinymist
-        llvmPackages.clang-tools # For C/C++, includes clangd. More portable than a versioned package.
-        # ccls # Alternative to clangd
+
+        # Packages that include lsps
+        llvmPackages.clang-tools # clangd
+        rustup # rust analyzer
 
         # Formatters
         tex-fmt
