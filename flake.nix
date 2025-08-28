@@ -38,10 +38,10 @@
         cmake-language-server
         tailwindcss-language-server
         tinymist
+        rust-analyzer
 
         # Packages that include lsps
         llvmPackages.clang-tools # clangd
-        rustup # rust analyzer
 
         # Formatters
         tex-fmt
