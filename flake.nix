@@ -45,6 +45,7 @@
 
         # Formatters
         tex-fmt
+        rustfmt
         markdownlint-cli
         alejandra # For Nix
         yq-go
