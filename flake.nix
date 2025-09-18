@@ -53,6 +53,7 @@
         jq
         stylua # For Lua
         nodePackages.prettier
+        astyle
 
         # Debugger adapters
         vscode-extensions.ms-vscode.cpptools
