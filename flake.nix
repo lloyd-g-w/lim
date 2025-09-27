@@ -99,7 +99,7 @@
             export OPEN_DEBUG_AD7="${cppToolsPath}/debugAdapters/bin/OpenDebugAD7"
 
             # Create an alias so that running `nvim` in the shell uses this flake's configuration.
-            alias nvim='nvim -u "${neovim-init}"'
+            alias nvim='nvim --cmd "set rtp^=${neovim-config-pkg}" -u ${neovim-init}'
 
             echo "Neovim dev shell activated."
           '';
