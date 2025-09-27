@@ -77,6 +77,7 @@
 
         # Package the neovim configuration directory itself.
         neovim-config-pkg = ./.;
+        neovim-init = /init.lua;
 
         # A helper variable for the cpptools path for clarity
         cppToolsPath = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools";
@@ -98,7 +99,7 @@
             export OPEN_DEBUG_AD7="${cppToolsPath}/debugAdapters/bin/OpenDebugAD7"
 
             # Create an alias so that running `nvim` in the shell uses this flake's configuration.
-            alias nvim='nvim --cmd "set rtp^=${neovim-config-pkg}"'
+            alias nvim='nvim -u "${neovim-init}"'
 
             echo "Neovim dev shell activated."
           '';
@@ -111,7 +112,7 @@
             # "$@" adds all the args
             text = ''
               export OPEN_DEBUG_AD7="${cppToolsPath}/debugAdapters/bin/OpenDebugAD7"
-              exec nvim --cmd "set rtp^=${neovim-config-pkg}" "$@"
+              exec nvim -u "${neovim-init}" "$@"
             '';
           };
         in {
