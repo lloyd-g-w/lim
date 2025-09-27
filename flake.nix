@@ -112,7 +112,7 @@
             # "$@" adds all the args
             text = ''
               export OPEN_DEBUG_AD7="${cppToolsPath}/debugAdapters/bin/OpenDebugAD7"
-              exec nvim -u "${neovim-init}" "$@"
+              exec nvim --cmd "set rtp^=${neovim-config-pkg}" -u ${neovim-init} "$@"
             '';
           };
         in {
