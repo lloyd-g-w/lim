@@ -77,7 +77,7 @@
 
         # Package the neovim configuration directory itself.
         neovim-config-pkg = ./.;
-        neovim-init = /init.lua;
+        neovim-init = ./init.lua;
 
         # A helper variable for the cpptools path for clarity
         cppToolsPath = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools";
