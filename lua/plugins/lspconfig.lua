@@ -37,6 +37,11 @@ return {
 		lspconfig.ocamllsp.setup({
 			settings = {
 				merlinDiagnostics = { enable = true },
+				extendedHover = { enable = true },
+				codelens = { enable = true },
+				inlayHints = { enable = true },
+				syntaxDocumentation = { enable = true },
+				merlinJumpCodeActions = { enable = true },
 				-- duneDiagnostics = { enable = true },
 				-- merlinDiagnostics is for the Jane Street fork of ocamllsp
 			},
