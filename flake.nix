@@ -21,6 +21,9 @@
         # VimTex Deps
         tree-sitter
 
+        # Latex
+        texpresso
+
         # Telescope Deps
         ripgrep
 
