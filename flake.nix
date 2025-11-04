@@ -23,6 +23,7 @@
 
         # Latex
         texpresso
+        tectonic
 
         # Telescope Deps
         ripgrep
