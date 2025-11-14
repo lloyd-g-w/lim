@@ -30,17 +30,6 @@ return {
 				"clangd",
 				"--background-index",
 			},
-			settings = {
-				clangd = {
-					InlayHints = {
-						Designators = true,
-						Enabled = true,
-						ParameterNames = true,
-						DeducedTypes = true,
-					},
-					fallbackFlags = { "-std=c++20" },
-				},
-			},
 		})
 		lspconfig.nixd.setup({})
 		lspconfig.rust_analyzer.setup({})
