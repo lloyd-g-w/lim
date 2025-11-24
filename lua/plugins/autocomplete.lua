@@ -115,9 +115,9 @@ return {
 				t(" $"),
 			}),
 			s({ trig = "dm", snippetType = "autosnippet" }, {
-				t("$ "),
+				t("$\n"),
 				i(1),
-				t(" $"),
+				t(".\n$"),
 			}),
 		})
 
