@@ -115,9 +115,9 @@ return {
 				t(" $"),
 			}),
 			s({ trig = "dm", snippetType = "autosnippet" }, {
-				t("$\n"),
-				i(1),
-				t(".\n$"),
+				t({ "$", "" }), -- line 1: "$", line 2: empty
+				i(1), -- you type here
+				t({ "", "$" }),
 			}),
 		})
 
