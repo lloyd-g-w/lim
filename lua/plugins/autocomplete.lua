@@ -117,7 +117,7 @@ return {
 			s({ trig = "dm", snippetType = "autosnippet" }, {
 				t({ "$", "  " }),
 				i(1),
-				t({ ".", "$" }),
+				t({ "", ".", "$" }),
 			}),
 		})
 
