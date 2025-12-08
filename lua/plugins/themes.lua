@@ -46,23 +46,23 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1500,
-		config = function()
-			require("catppuccin").setup({
-				auto_integrations = true,
-				flavour = "macchiato", -- latte, frappe, macchiato, mocha
-			})
-			vim.cmd.colorscheme("catppuccin")
-		end,
+		-- config = function()
+		-- 	require("catppuccin").setup({
+		-- 		auto_integrations = true,
+		-- 		flavour = "macchiato", -- latte, frappe, macchiato, mocha
+		-- 	})
+		-- 	vim.cmd.colorscheme("catppuccin")
+		-- end,
 	},
 	{
 		"navarasu/onedark.nvim",
 		priority = 1000, -- make sure to load this before all the other start plugins
-		-- config = function()
-		-- 	require("onedark").setup({
-		-- 		style = "darker",
-		-- 	})
-		-- 	require("onedark").load()
-		-- end,
+		config = function()
+			require("onedark").setup({
+				style = "warm",
+			})
+			require("onedark").load()
+		end,
 	},
 	{ "projekt0n/github-nvim-theme", name = "github-theme" },
 	{ "rebelot/kanagawa.nvim" },
