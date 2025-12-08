@@ -10,8 +10,9 @@ return {
 		-- Define a highlight group for our header
 		-- vim.api.nvim_set_hl(0, "AlphaHeader", { fg = cp.peach, bg = cp.base })
 		-- vim.api.nvim_set_hl(0, "AlphaHeader", { link = "Title" })
-		local accent = vim.api.nvim_get_hl(0, { name = "String" }).fg
-		vim.api.nvim_set_hl(0, "AlphaHeader", { fg = accent })
+		-- local accent = vim.api.nvim_get_hl(0, { name = "String" }).fg
+		-- vim.api.nvim_set_hl(0, "AlphaHeader", { fg = accent })
+		vim.api.nvim_set_hl(0, "AlphaHeader", { link = "Keyword" })
 
 		-- Cool Catppuccin-style ASCII art
 		dashboard.section.header.val = {
