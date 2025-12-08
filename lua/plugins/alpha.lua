@@ -6,9 +6,9 @@ return {
 		local dashboard = require("alpha.themes.dashboard")
 
 		-- Catppuccin palette
-		local cp = require("catppuccin.palettes").get_palette("macchiato")
+		-- local cp = require("catppuccin.palettes").get_palette("macchiato")
 		-- Define a highlight group for our header
-		vim.api.nvim_set_hl(0, "AlphaHeader", { fg = cp.peach, bg = cp.base })
+		-- vim.api.nvim_set_hl(0, "AlphaHeader", { fg = cp.peach, bg = cp.base })
 
 		-- Cool Catppuccin-style ASCII art
 		dashboard.section.header.val = {
