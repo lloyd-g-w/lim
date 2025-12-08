@@ -9,7 +9,9 @@ return {
 		-- local cp = require("catppuccin.palettes").get_palette("macchiato")
 		-- Define a highlight group for our header
 		-- vim.api.nvim_set_hl(0, "AlphaHeader", { fg = cp.peach, bg = cp.base })
-		vim.api.nvim_set_hl(0, "AlphaHeader", { link = "Title" })
+		-- vim.api.nvim_set_hl(0, "AlphaHeader", { link = "Title" })
+		local accent = vim.api.nvim_get_hl(0, { name = "String" }).fg
+		vim.api.nvim_set_hl(0, "AlphaHeader", { fg = accent })
 
 		-- Cool Catppuccin-style ASCII art
 		dashboard.section.header.val = {
