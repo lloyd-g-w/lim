@@ -45,7 +45,7 @@
         rust-analyzer
         zls
         qt6
-        qt5.full
+        qt5
 
         # Packages that include lsps
         llvmPackages.clang-tools # clangd
