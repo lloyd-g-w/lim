@@ -64,6 +64,7 @@ return {
 		lspconfig.vimls.setup({})
 		lspconfig.lua_ls.setup({})
 		lspconfig.cmake.setup({})
+		lspconfig.zls.setup({})
 		lspconfig.texlab.setup({})
 	end,
 }
