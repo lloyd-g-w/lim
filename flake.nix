@@ -44,7 +44,7 @@
         tinymist
         rust-analyzer
         zls
-        qt6.qttools # QMLLS
+        qt6Packages.qtdeclarative # QMLLS
 
         # Packages that include lsps
         llvmPackages.clang-tools # clangd
