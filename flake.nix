@@ -44,7 +44,8 @@
         tinymist
         rust-analyzer
         zls
-        kdePackages.qtlanguageserver
+        qt6
+        qt5.full
 
         # Packages that include lsps
         llvmPackages.clang-tools # clangd
