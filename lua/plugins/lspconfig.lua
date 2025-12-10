@@ -66,5 +66,6 @@ return {
 		lspconfig.cmake.setup({})
 		lspconfig.zls.setup({})
 		lspconfig.texlab.setup({})
+		lspconfig.qmlls.setup({})
 	end,
 }
