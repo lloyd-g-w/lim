@@ -43,6 +43,7 @@
         tailwindcss-language-server
         tinymist
         rust-analyzer
+        zls
 
         # Packages that include lsps
         llvmPackages.clang-tools # clangd
