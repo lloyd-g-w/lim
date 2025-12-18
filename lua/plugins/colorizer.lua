@@ -1,7 +1,9 @@
 return {
 	"catgoose/nvim-colorizer.lua",
 	event = "BufReadPre",
-	opts = { -- set to setup table
-		css = true,
+	opts = {
+		user_default_options = {
+			css = true,
+		},
 	},
 }
