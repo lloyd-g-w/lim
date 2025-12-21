@@ -149,7 +149,7 @@
 
         # Source the neovim configuration from this flake.
         # By using `perSystemOutputs` instead of `self`, we avoid the evaluation error.
-        home.file.".config/nvim".source = perSystemOutputs.packages.${pkgs.stdenv.hostPlatform.system}.neovim-config;
+        home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink perSystemOutputs.packages.${pkgs.stdenv.hostPlatform.system}.neovim-config;
 
         # Install all dependency packages into the user's profile.
         home.packages = getNeovimDeps pkgs;
