@@ -28,8 +28,7 @@ return {
 		lspconfig.clangd.setup({
 			cmd = {
 				"clangd",
-				"--background-index",
-				"--query-driver=/nix/store/*/bin/g++,/nix/store/*/bin/c++",
+				"--query-driver=**/bin/g++,**/bin/c++",
 			},
 		})
 		lspconfig.nixd.setup({})
