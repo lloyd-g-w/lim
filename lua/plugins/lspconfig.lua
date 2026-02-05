@@ -25,12 +25,21 @@ return {
 
 		lspconfig.hls.setup({})
 		-- lspconfig.ccls.setup({})
+
 		lspconfig.clangd.setup({
-			cmd = {
-				"clangd",
-				"--query-driver=**/bin/g++,**/bin/c++",
+			cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+			init_options = {
+				fallbackFlags = { "-std=c++17" },
 			},
 		})
+		lspconfig.opts = {
+			servers = {
+				clangd = {
+					mason = false,
+				},
+			},
+		}
+
 		lspconfig.nixd.setup({})
 		lspconfig.rust_analyzer.setup({})
 
