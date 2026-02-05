@@ -25,21 +25,16 @@ return {
 
 		lspconfig.hls.setup({})
 		-- lspconfig.ccls.setup({})
-
 		lspconfig.clangd.setup({
-			cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
-			init_options = {
-				fallbackFlags = { "-std=c++17" },
+			cmd = {
+				"clangd",
+				"--background-index",
+				"--clang-tidy",
+				"--log=verbose",
+				"--header-insertion=never",
+				"--query-driver=/nix/store/*/bin/clang*,/run/current-system/sw/bin/clang*", -- So clang headers can actually be found
 			},
 		})
-		lspconfig.opts = {
-			servers = {
-				clangd = {
-					mason = false,
-				},
-			},
-		}
-
 		lspconfig.nixd.setup({})
 		lspconfig.rust_analyzer.setup({})
 
