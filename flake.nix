@@ -38,13 +38,13 @@
 
         # C++
         # Clangd from clang-tools must come first.
-        (lib.hiPrio llvmPackages_16.clang-tools.override {
-          llvmPackages = llvmPackages_16;
+        (lib.hiPrio clang-tools.override {
+          llvmPackages = llvmPackages;
           enableLibcxx = false;
         })
         # Do not use the clangd from this package as it does not work correctly with
         # stdlib headers.
-        llvmPackages_16.libstdcxxClang
+        llvmPackages.libstdcxxClang
         # clang-tools
 
         tex-fmt
