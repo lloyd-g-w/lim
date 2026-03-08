@@ -38,11 +38,11 @@
 
         # C++
         # Clangd from clang-tools must come first.
-        (lib.hiPrio llvmPackages_16.clang-tools)
+        (lib.hiPrio clang-tools)
 
         # Do not use the clangd from this package as it does not work correctly with
         # stdlib headers.
-        llvmPackages_16.libstdcxxClang
+        clang
 
         tex-fmt
         rustfmt
