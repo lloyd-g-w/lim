@@ -38,7 +38,7 @@
 
         # C++
         # Clangd from clang-tools must come first.
-        (hiPrio clang-tools.override {
+        (lib.hiPrio llvmPackages_16.clang-tools.override {
           llvmPackages = llvmPackages_16;
           enableLibcxx = false;
         })
