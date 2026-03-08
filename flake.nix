@@ -36,7 +36,7 @@
         zls
         qt6Packages.qtdeclarative
 
-        llvmPackages.clang-tools
+        # llvmPackages.clang-tools
 
         tex-fmt
         rustfmt
