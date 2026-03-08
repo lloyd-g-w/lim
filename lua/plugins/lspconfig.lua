@@ -29,6 +29,10 @@ return {
 			cmd = {
 				"clangd",
 				"--background-index",
+				"--clang-tidy",
+				"--log=verbose",
+				"--header-insertion=never",
+				"--query-driver=/nix/store/*/bin/clang*,/run/current-system/sw/bin/clang*", -- So clang headers can actually be found
 			},
 		})
 		lspconfig.nixd.setup({})
