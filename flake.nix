@@ -52,7 +52,6 @@
         black
         jq
         stylua
-        nodePackages.prettier
         astyle
 
         vscode-extensions.ms-vscode.cpptools
