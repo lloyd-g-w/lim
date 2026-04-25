@@ -160,7 +160,14 @@
               (getNeovimDeps pkgs)
               ++ [self.packages.${system}.lim];
 
-            programs.neovim.enable = true;
+            programs.neovim = {
+              enable = true;
+
+              withRuby = true;
+              withPython3 = true;
+
+              sideloadInitLua = true;
+            };
 
             home.file.".config/nvim".source =
               if cfg.devPath != null
