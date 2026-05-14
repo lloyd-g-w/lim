@@ -1,8 +1,7 @@
 return {
 	"neovim/nvim-lspconfig",
 	config = function()
-		local lspconfig = require("lspconfig")
-		local util = require("lspconfig.util")
+		local lspconfig = vim.lsp.config
 		local make_caps = vim.lsp.protocol.make_client_capabilities
 
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "lsp go to definition" })
