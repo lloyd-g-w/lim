@@ -1,12 +1,8 @@
 return {
 	"neovim/nvim-lspconfig",
 	config = function()
-		local lspconfig = vim.lsp.config
-		local make_caps = vim.lsp.protocol.make_client_capabilities
-
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "lsp go to definition" })
 		vim.keymap.set("n", "K", function()
-			-- vim.lsp.buf.hover({ border = "rounded" })
 			vim.lsp.buf.hover()
 		end, { desc = "LSP hover" })
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "lsp code actions" })
@@ -19,25 +15,27 @@ return {
 			severity_sort = true,
 		})
 
-		local caps = make_caps()
+		local caps = vim.lsp.protocol.make_client_capabilities()
 		caps.offsetEncoding = { "utf-16" }
 
-		lspconfig.hls.setup({})
-		-- lspconfig.ccls.setup({})
-		lspconfig.clangd.setup({
+		vim.lsp.config("hls", {})
+
+		vim.lsp.config("clangd", {
+			capabilities = caps,
 			cmd = {
 				"clangd",
 				"--background-index",
 				"--clang-tidy",
 				"--log=verbose",
 				"--header-insertion=never",
-				"--query-driver=/nix/store/*/bin/clang*,/run/current-system/sw/bin/clang*", -- So clang headers can actually be found
+				"--query-driver=/nix/store/*/bin/clang*,/run/current-system/sw/bin/clang*",
 			},
 		})
-		lspconfig.nixd.setup({})
-		lspconfig.rust_analyzer.setup({})
 
-		lspconfig.ocamllsp.setup({
+		vim.lsp.config("nixd", {})
+		vim.lsp.config("rust_analyzer", {})
+
+		vim.lsp.config("ocamllsp", {
 			settings = {
 				merlinDiagnostics = { enable = true },
 				extendedHover = { enable = true },
@@ -45,30 +43,49 @@ return {
 				inlayHints = { enable = true },
 				syntaxDocumentation = { enable = true },
 				merlinJumpCodeActions = { enable = true },
-				-- duneDiagnostics = { enable = true },
-				-- merlinDiagnostics is for the Jane Street fork of ocamllsp
 			},
 		})
 
-		lspconfig.svelte.setup({
+		vim.lsp.config("svelte", {
 			on_attach = function(client, bufnr) end,
 		})
-		lspconfig.tinymist.setup({
+
+		vim.lsp.config("tinymist", {
 			settings = {
-				formatterMode = "typstyle", -- use typstyle inside Tinymist
-				formatterPrintWidth = 80, -- line width
-				formatterIndentSize = 2, -- indent
-				formatterProseWrap = true, -- wrap prose at print width
+				formatterMode = "typstyle",
+				formatterPrintWidth = 80,
+				formatterIndentSize = 2,
+				formatterProseWrap = true,
 			},
-		}) -- Typst
-		lspconfig.csharp_ls.setup({})
-		lspconfig.ts_ls.setup({})
-		lspconfig.basedpyright.setup({})
-		lspconfig.vimls.setup({})
-		lspconfig.lua_ls.setup({})
-		lspconfig.cmake.setup({})
-		lspconfig.zls.setup({})
-		lspconfig.texlab.setup({})
-		lspconfig.qmlls.setup({})
+		})
+
+		vim.lsp.config("csharp_ls", {})
+		vim.lsp.config("ts_ls", {})
+		vim.lsp.config("basedpyright", {})
+		vim.lsp.config("vimls", {})
+		vim.lsp.config("lua_ls", {})
+		vim.lsp.config("cmake", {})
+		vim.lsp.config("zls", {})
+		vim.lsp.config("texlab", {})
+		vim.lsp.config("qmlls", {})
+
+		vim.lsp.enable({
+			"hls",
+			"clangd",
+			"nixd",
+			"rust_analyzer",
+			"ocamllsp",
+			"svelte",
+			"tinymist",
+			"csharp_ls",
+			"ts_ls",
+			"basedpyright",
+			"vimls",
+			"lua_ls",
+			"cmake",
+			"zls",
+			"texlab",
+			"qmlls",
+		})
 	end,
 }
