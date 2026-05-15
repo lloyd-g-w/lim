@@ -17,7 +17,7 @@
         # For image.nvim plugin
         luajitPackages.magick
         imagemagick
-        # luarocks
+        luarocks
 
         lazygit
         tree-sitter
