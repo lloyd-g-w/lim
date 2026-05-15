@@ -14,6 +14,10 @@
   }: let
     getNeovimDeps = pkgs:
       with pkgs; [
+        # For image.nvim plugin
+        luajitPackages.magick
+        imagemagick
+
         lazygit
         tree-sitter
         texpresso
