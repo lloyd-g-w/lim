@@ -18,6 +18,7 @@
         luajitPackages.magick
         imagemagick
         luarocks
+        lua5_1
 
         lazygit
         tree-sitter
