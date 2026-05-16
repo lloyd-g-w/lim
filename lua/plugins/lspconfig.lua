@@ -28,7 +28,18 @@ return {
 				"--clang-tidy",
 				"--log=verbose",
 				"--header-insertion=never",
-				"--query-driver=/nix/store/*/bin/clang*,/run/current-system/sw/bin/clang*",
+
+				-- Let clangd ask these compilers where their system headers are.
+				"--query-driver=/nix/store/*/bin/clang*,/nix/store/*/bin/g++,/nix/store/*/bin/gcc,/run/current-system/sw/bin/clang*,/run/current-system/sw/bin/g++,/run/current-system/sw/bin/gcc",
+			},
+
+			init_options = {
+				fallbackFlags = {
+					"-std=c++23",
+					"-stdlib=libstdc++",
+					"-Wall",
+					"-Wextra",
+				},
 			},
 		})
 
