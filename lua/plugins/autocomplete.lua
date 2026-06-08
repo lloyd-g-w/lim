@@ -60,6 +60,7 @@ return {
 		local i = ls.insert_node
 		local d = ls.dynamic_node
 		local sn = ls.snippet_node
+		local f = ls.function_node
 
 		-- CUSTOM SNIPPETS
 		local c_type_snips = {
@@ -118,6 +119,27 @@ return {
 				t({ "$", "  " }),
 				i(1),
 				t({ "", "  .", "$" }),
+			}),
+			-- def -> #definition()[
+			--   cursor
+			-- ]
+			s({ trig = "def", name = "definition", dscr = "Typst definition block" }, {
+				t({ "#definition()[", "\t" }),
+				i(1),
+				t({ "", "]" }),
+			}),
+
+			-- def title -> #definition(title: "title")[
+			--   cursor
+			-- ]
+			s({ trig = "def%s+(.+)", regTrig = true, name = "definition with title" }, {
+				t('#definition(title: "'),
+				f(function(_, snip)
+					return snip.captures[1]
+				end),
+				t({ '")[', "\t" }),
+				i(1),
+				t({ "", "]" }),
 			}),
 		})
 
