@@ -138,7 +138,6 @@
         }: let
           cfg = config.programs.lim;
           system = pkgs.stdenv.hostPlatform.system;
-          devNvimCommand = "nvim --cmd ${lib.escapeShellArg "set rtp^=${cfg.devPath}"} -u ${lib.escapeShellArg "${cfg.devPath}/init.lua"}";
         in {
           options.programs.lim = {
             enable = lib.mkEnableOption "Lim setup";
@@ -156,7 +155,18 @@
             };
           };
 
-          config = lib.mkIf cfg.enable {
+          config = lib.mkIf cfg.enable (let
+            deps = getNeovimDeps pkgs;
+            cppToolsPath = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools";
+            limDevPkg = pkgs.writeShellApplication {
+              name = "lim-dev";
+              runtimeInputs = [pkgs.neovim] ++ deps;
+              text = ''
+                export OPEN_DEBUG_AD7="${cppToolsPath}/debugAdapters/bin/OpenDebugAD7"
+                exec nvim --cmd ${lib.escapeShellArg "set rtp^=${cfg.devPath}"} -u ${lib.escapeShellArg "${cfg.devPath}/init.lua"} "$@"
+              '';
+            };
+          in {
             nixpkgs.config = {
               allowUnfree = true;
               permittedInsecurePackages = ["libsoup-2.74.3"];
@@ -164,8 +174,14 @@
 
             # Put lim + its deps in your profile
             home.packages =
-              (getNeovimDeps pkgs)
-              ++ [self.packages.${system}.lim];
+              deps
+              ++ [
+                (
+                  if cfg.devPath != null
+                  then limDevPkg
+                  else self.packages.${system}.lim
+                )
+              ];
 
             programs.neovim = {
               enable = true;
@@ -181,19 +197,19 @@
               then config.lib.file.mkOutOfStoreSymlink cfg.devPath
               else self.packages.${system}.neovim-config;
 
-            home.sessionVariables.OPEN_DEBUG_AD7 = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7";
+            home.sessionVariables.OPEN_DEBUG_AD7 = "${cppToolsPath}/debugAdapters/bin/OpenDebugAD7";
 
             home.shellAliases =
               {
                 nvim =
                   if cfg.devPath != null
-                  then devNvimCommand
+                  then "lim-dev"
                   else "lim";
               }
               // lib.optionalAttrs (cfg.devPath != null) {
-                lim = devNvimCommand;
+                lim = "lim-dev";
               };
-          };
+          });
         };
       };
     };
