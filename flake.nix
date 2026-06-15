@@ -174,8 +174,7 @@
 
             # Put lim + its deps in your profile
             home.packages =
-              deps
-              ++ [
+              [
                 (
                   if cfg.devPath != null
                   then limDevPkg
@@ -188,6 +187,7 @@
 
               withRuby = true;
               withPython3 = true;
+              extraPackages = deps;
 
               sideloadInitLua = true;
             };
