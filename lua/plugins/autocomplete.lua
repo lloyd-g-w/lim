@@ -141,6 +141,11 @@ return {
 				i(1),
 				t({ "", "]" }),
 			}),
+			s({ trig = "b([%a]+)", regTrig = true, wordTrig = false, name = "bold word" }, {
+				f(function(_, snip)
+					return "bold(" .. snip.captures[1] .. ")"
+				end),
+			}),
 		})
 
 		require("luasnip.loaders.from_lua").load()
