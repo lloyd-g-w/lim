@@ -3,7 +3,7 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs = inputs @ {
@@ -138,6 +138,13 @@
         }: let
           cfg = config.programs.lim;
           system = pkgs.stdenv.hostPlatform.system;
+          limPkgs = import nixpkgs {
+            inherit system;
+            config = {
+              allowUnfree = true;
+              permittedInsecurePackages = ["libsoup-2.74.3"];
+            };
+          };
         in {
           options.programs.lim = {
             enable = lib.mkEnableOption "Lim setup";
@@ -156,11 +163,11 @@
           };
 
           config = lib.mkIf cfg.enable (let
-            deps = getNeovimDeps pkgs;
-            cppToolsPath = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools";
-            limDevPkg = pkgs.writeShellApplication {
+            deps = getNeovimDeps limPkgs;
+            cppToolsPath = "${limPkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools";
+            limDevPkg = limPkgs.writeShellApplication {
               name = "lim-dev";
-              runtimeInputs = [pkgs.neovim] ++ deps;
+              runtimeInputs = [limPkgs.neovim] ++ deps;
               text = ''
                 export OPEN_DEBUG_AD7="${cppToolsPath}/debugAdapters/bin/OpenDebugAD7"
                 exec nvim --cmd ${lib.escapeShellArg "set rtp^=${cfg.devPath}"} -u ${lib.escapeShellArg "${cfg.devPath}/init.lua"} "$@"
@@ -184,6 +191,7 @@
 
             programs.neovim = {
               enable = true;
+              package = limPkgs.neovim-unwrapped;
 
               withRuby = true;
               withPython3 = true;
