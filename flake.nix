@@ -3,7 +3,7 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs = inputs @ {
@@ -138,6 +138,13 @@
         }: let
           cfg = config.programs.lim;
           system = pkgs.stdenv.hostPlatform.system;
+          limPkgs = import nixpkgs {
+            inherit system;
+            config = {
+              allowUnfree = true;
+              permittedInsecurePackages = ["libsoup-2.74.3"];
+            };
+          };
         in {
           options.programs.lim = {
             enable = lib.mkEnableOption "Lim setup";
@@ -155,7 +162,18 @@
             };
           };
 
-          config = lib.mkIf cfg.enable {
+          config = lib.mkIf cfg.enable (let
+            deps = getNeovimDeps limPkgs;
+            cppToolsPath = "${limPkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools";
+            limDevPkg = limPkgs.writeShellApplication {
+              name = "lim-dev";
+              runtimeInputs = [limPkgs.neovim] ++ deps;
+              text = ''
+                export OPEN_DEBUG_AD7="${cppToolsPath}/debugAdapters/bin/OpenDebugAD7"
+                exec nvim --cmd ${lib.escapeShellArg "set rtp^=${cfg.devPath}"} -u ${lib.escapeShellArg "${cfg.devPath}/init.lua"} "$@"
+              '';
+            };
+          in {
             nixpkgs.config = {
               allowUnfree = true;
               permittedInsecurePackages = ["libsoup-2.74.3"];
@@ -163,14 +181,21 @@
 
             # Put lim + its deps in your profile
             home.packages =
-              (getNeovimDeps pkgs)
-              ++ [self.packages.${system}.lim];
+              [
+                (
+                  if cfg.devPath != null
+                  then limDevPkg
+                  else self.packages.${system}.lim
+                )
+              ];
 
             programs.neovim = {
               enable = true;
+              package = limPkgs.neovim-unwrapped;
 
               withRuby = true;
               withPython3 = true;
+              extraPackages = deps;
 
               sideloadInitLua = true;
             };
@@ -180,8 +205,19 @@
               then config.lib.file.mkOutOfStoreSymlink cfg.devPath
               else self.packages.${system}.neovim-config;
 
-            home.sessionVariables.OPEN_DEBUG_AD7 = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7";
-          };
+            home.sessionVariables.OPEN_DEBUG_AD7 = "${cppToolsPath}/debugAdapters/bin/OpenDebugAD7";
+
+            home.shellAliases =
+              {
+                nvim =
+                  if cfg.devPath != null
+                  then "lim-dev"
+                  else "lim";
+              }
+              // lib.optionalAttrs (cfg.devPath != null) {
+                lim = "lim-dev";
+              };
+          });
         };
       };
     };
