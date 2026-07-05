@@ -17,8 +17,10 @@ return {
 
 		vim.api.nvim_create_autocmd("FileType", {
 			callback = function(args)
-				-- Keep latex disabled, like your old config.
-				if vim.bo[args.buf].filetype == "latex" then
+				local ft = vim.bo[args.buf].filetype
+
+				-- Let VimTeX handle LaTeX syntax highlighting.
+				if ft == "tex" or ft == "latex" then
 					return
 				end
 
